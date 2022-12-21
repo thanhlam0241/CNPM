@@ -24,6 +24,7 @@ function CollapseButton({ buttonObject, isOpen }) {
                     <div className={cx('nav-group-collapse')}>
                         {buttonObject.collapse.map((item) => {
                             return <NavLink
+                                style={{ width: 200 }}
                                 key={item.id}
                                 className={({ isActive }) => {
                                     if (isActive) {
@@ -35,7 +36,7 @@ function CollapseButton({ buttonObject, isOpen }) {
                                     }
                                 }}
                                 to={item.linkCol}>
-                                <span>{item.title}</span>
+                                <span className={cx('text-btn')}>{item.title}</span>
                             </NavLink>
                         })}
                     </div>

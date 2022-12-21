@@ -1,145 +1,116 @@
-import * as React from 'react';
-import Paper from '@mui/material/Paper';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
-import TableRow from '@mui/material/TableRow';
+import { useState, useEffect } from 'react';
+import { DataGrid, GridToolbar } from '@mui/x-data-grid';
+import { Collapse, Button, TextField } from '@mui/material';
 
-// interface Column {
-//     id: 'name' | 'code' | 'population' | 'size' | 'density';
-//     label: string;
-//     minWidth?: number;
-//     align?: 'right';
-//     format?: (value: number) => string;
-// }
+// import styles from './Table1.module.scss';
+// import classNames from 'classnames/bind';
 
+// const cx = classNames.bind(styles);
+
+//column field
 const columns = [
-    { id: 'name', label: 'Name', minWidth: 170 },
-    { id: 'code', label: 'ISO\u00a0Code', minWidth: 100 },
-    {
-        id: 'population',
-        label: 'Population',
-        minWidth: 170,
-        align: 'right',
-        format: (value) => value.toLocaleString('en-US'),
-    },
-    {
-        id: 'size',
-        label: 'Size\u00a0(km\u00b2)',
-        minWidth: 170,
-        align: 'right',
-        format: (value) => value.toLocaleString('en-US'),
-    },
-    {
-        id: 'density',
-        label: 'Density',
-        minWidth: 170,
-        align: 'right',
-        format: (value) => value.toFixed(2),
-    },
-];
-
-// interface Data {
-//     name: string;
-//     code: string;
-//     population: number;
-//     size: number;
-//     density: number;
-// }
-
-function createData(
-    name,
-    code,
-    population,
-    size,
-) {
-    const density = population / size;
-    return { name, code, population, size, density };
-}
-
+    { field: 'id', headerName: 'ID', width: 40 },
+    { field: 'soHoKhau', headerName: 'Số hộ khẩu', width: 110 },
+    { field: 'noiThuongTru', headerName: 'Nơi thường trú', width: 140 },
+    { field: 'thanhVien', headerName: 'Danh sách các thành viên', width: 300 },
+    { field: 'chuHo', headerName: 'Chủ hộ', width: 150 },
+    { field: 'toPhuTrach', headerName: 'Tổ phụ trách', type: 'number', width: 150 },
+]
+//data in each row
 const rows = [
-    createData('India', 'IN', 1324171354, 3287263),
-    createData('China', 'CN', 1403500365, 9596961),
-    createData('Italy', 'IT', 60483973, 301340),
-    createData('United States', 'US', 327167434, 9833520),
-    createData('Canada', 'CA', 37602103, 9984670),
-    createData('Australia', 'AU', 25475400, 7692024),
-    createData('Germany', 'DE', 83019200, 357578),
-    createData('Ireland', 'IE', 4857000, 70273),
-    createData('Mexico', 'MX', 126577691, 1972550),
-    createData('Japan', 'JP', 126317000, 377973),
-    createData('France', 'FR', 67022000, 640679),
-    createData('United Kingdom', 'GB', 67545757, 242495),
-    createData('Russia', 'RU', 146793744, 17098246),
-    createData('Nigeria', 'NG', 200962417, 923768),
-    createData('Brazil', 'BR', 210147125, 8515767),
-];
+    { id: 1, soHoKhau: '123432', noiThuongTru: 'Hà Nội', thanhVien: 'Nguyễn Văn A, Nguyễn Văn B', chuHo: 'Nguyễn Văn C', toPhuTrach: 1 },
+    { id: 2, soHoKhau: '123432', noiThuongTru: 'Hà Nội', thanhVien: 'Nguyễn Văn A, Nguyễn Văn B', chuHo: 'Nguyễn Văn C', toPhuTrach: 1 },
+    { id: 3, soHoKhau: '123432', noiThuongTru: 'Hà Nội', thanhVien: 'Nguyễn Văn A, Nguyễn Văn B', chuHo: 'Nguyễn Văn C', toPhuTrach: 1 },
+    { id: 4, soHoKhau: '123432', noiThuongTru: 'Hà Nội', thanhVien: 'Nguyễn Văn A, Nguyễn Văn B', chuHo: 'Nguyễn Văn C', toPhuTrach: 1 },
+    { id: 5, soHoKhau: '123432', noiThuongTru: 'Hà Nội', thanhVien: 'Nguyễn Văn A, Nguyễn Văn B', chuHo: 'Nguyễn Văn C', toPhuTrach: 1 },
+    { id: 6, soHoKhau: '123432', noiThuongTru: 'Hà Nội', thanhVien: 'Nguyễn Văn A, Nguyễn Văn B', chuHo: 'Nguyễn Văn C', toPhuTrach: 1 },
+    { id: 7, soHoKhau: '123432', noiThuongTru: 'Hà Nội', thanhVien: 'Nguyễn Văn A, Nguyễn Văn B', chuHo: 'Nguyễn Văn C', toPhuTrach: 1 },
+    { id: 8, soHoKhau: '123432', noiThuongTru: 'Hà Nội', thanhVien: 'Nguyễn Văn A, Nguyễn Văn B', chuHo: 'Nguyễn Văn C', toPhuTrach: 1 }
+]
 
-export default function StickyHeadTable() {
-    const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(10);
+export default function TableHoKhau() {
+    const [selectedRows, setSelectedRows] = useState(rows[0]);
+    const [visible, setVisible] = useState(false);
+    const [columnsTable, setColumsTable] = useState(columns);
+    const [idField, setIdField] = useState(rows[0].id);
+    const [deskField, setDeskField] = useState(rows[0].desk);
+    useEffect(() => {
+        const actionFirst = setTimeout(() => {
+            setColumsTable([
+                ...columns,
+                {
+                    field: 'action',
+                    headerName: '  ',
+                    width: 220,
+                    renderCell: (params) => {
+                        const onClick = (e) => {
+                            e.stopPropagation();
 
-    const handleChangePage = (event, newPage) => {
-        setPage(newPage);
-    };
+                            const api = params.api;
+                            const thisRow = {};
 
-    const handleChangeRowsPerPage = (event) => {
-        setRowsPerPage(+event.target.value);
-        setPage(0);
-    };
-
-    return (
-        <Paper sx={{ width: '100%', height: '100%', overflow: 'hidden' }}>
-            <TableContainer sx={{ maxHeight: 440 }}>
-                <Table stickyHeader aria-label="sticky table">
-                    <TableHead>
-                        <TableRow>
-                            {columns.map((column) => (
-                                <TableCell
-                                    key={column.id}
-                                    align={column.align}
-                                    style={{ minWidth: column.minWidth, fontSize: 16 }}
-                                >
-                                    {column.label}
-                                </TableCell>
-                            ))}
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {rows
-                            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                            .map((row) => {
-                                return (
-                                    <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                                        {columns.map((column) => {
-                                            const value = row[column.id];
-                                            return (
-                                                <TableCell sx={{ fontSize: 16 }} key={column.id} align={column.align}>
-                                                    {column.format && typeof value === 'number'
-                                                        ? column.format(value)
-                                                        : value}
-                                                </TableCell>
-                                            );
-                                        })}
-                                    </TableRow>
+                            api.getAllColumns()
+                                .filter((c) => c.field !== '__check__' && !!c)
+                                .forEach(
+                                    (c) => (thisRow[c.field] = params.getValue(params.id, c.field)),
                                 );
-                            })}
-                    </TableBody>
-                </Table>
-            </TableContainer>
-            <TablePagination
-                style={{ fontSize: 16 }}
-                rowsPerPageOptions={[10, 25, 100]}
-                component="div"
-                count={rows.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                onPageChange={handleChangePage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
+                            setVisible(true);
+                            setSelectedRows(thisRow);
+                            setIdField(thisRow.id);
+                            setDeskField(thisRow.desk);
+                        };
+                        return (< div style={{ display: 'flex', alignItems: 'stretch', flexDirection: 'row', padding: '2px 0', margin: '0px 2px' }}>
+                            <Button variant="contained" color="primary" onClick={onClick}>
+                                Edit
+                            </Button>
+                            <Button variant="contained" color="error" onClick={onClick}>
+                                Delete
+                            </Button>
+                        </ div >)
+                    }
+                }
+            ])
+        }, 100)
+
+        return () => {
+            clearTimeout(actionFirst)
+        }
+    }, [])
+    return (
+        <div style={{ height: '90%', width: '100%', margin: '10' }}>
+            <div>
+                <Button sx={{ margin: '0 5px 1px 0' }} variant="contained" color="primary" onClick={() => setVisible(!visible)}>
+                    Edit
+                </Button>
+                <Button sx={{ margin: '0 5px 1px 0' }} variant="contained" color="primary" onClick={() => setVisible(!visible)}>
+                    Save
+                </Button>
+            </div>
+
+            <Collapse sx={{ margin: '5px 0' }} in={visible} timeout="auto" >
+                <div>
+                    <TextField sx={{ margin: '0 5px 0 0' }} id="outlined-basic" label={columns[0].headerName}
+                        variant='filled' value={idField} disabled />
+                    <TextField sx={{ margin: '0 5px 0 0' }} id="outlined-basic" label={columns[1].headerName}
+                        variant='filled' value={deskField} onChange={(e) => setDeskField(e.target.value)} />
+                </div>
+            </Collapse>
+
+            <DataGrid
+                sx={{ fontSize: 15 }}
+                rows={rows}
+                columns={columnsTable}
+                components={{
+                    Toolbar: GridToolbar,
+                }}
+                componentsProps={{
+                    toolbar: {
+                        showQuickFilter: true,
+                        quickFilterProps: { debounceMs: 500 },
+                    },
+                }}
+                disableSelectionOnClick
             />
-        </Paper>
+        </div>
     );
 }

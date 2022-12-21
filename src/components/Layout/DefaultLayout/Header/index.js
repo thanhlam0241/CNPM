@@ -7,7 +7,7 @@ import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { Avatar } from '@mui/material';
-
+import { deepOrange, deepPurple } from '@mui/material/colors';
 const cx = classNames.bind(styles);
 
 
@@ -31,7 +31,7 @@ function Header({ text }) {
                 </button>
             </div>
             <div className={cx('actions')}>
-                <Avatar alt="L" src='' />
+                <Avatar sx={{ bgcolor: deepOrange[500] }}>N</Avatar>
             </div>
         </ header>
     )

@@ -49,6 +49,13 @@
       "username": "messi123",
       "password": "123456",
       "id": 8
+    },
+    {
+      "username": "helloworld",
+      "password": "helloworld",
+      "id": 9
     }
-  ]
+  ],
+  "HK": [],
+  "NK": []
 }

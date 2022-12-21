@@ -16,25 +16,24 @@
     overflow-x: hidden;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
     justify-content: flex-start;
     border-radius: 15px;
     margin: var(--margin-side-bar);
-    gap: 5px;
+    gap: 10px;
 }
 
 .btn-side {
-    max-width: 20rem;
+    max-width: 25rem;
     background-color: var(--color-side);
     display: flex;
-    gap: 15px;
     align-items: center;
     justify-content: flex-start;
     border: none;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
     border-radius: 6px;
-    padding: 10px 5px;
+    padding: 5px 8px;
     &:hover {
         background-color: var(--sidebar-btn-color);
     }
@@ -43,8 +42,11 @@
     }
 }
 .normal-btn {
+    padding-left: 10px;
     text-align: left;
-    width: 10rem;
+    width: 15rem;
+    border-left: 1px solid 80%;
+    border-left-color: #fff;
 }
 .hide-btn {
     width: 0;
@@ -53,14 +55,13 @@
     max-width: 20rem;
     background-color: #3791ee;
     display: flex;
-    gap: 10px;
     align-items: center;
     justify-content: flex-start;
     border: none;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
     border-radius: 6px;
-    padding: 10px 5px;
+    padding: 5px 8px;
     span {
         color: var(--sidebar-text-color);
     }

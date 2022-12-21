@@ -10,13 +10,19 @@ import LogoutIcon from '@mui/icons-material/Logout';
 const buttons = [
     { icon: <DashboardIcon />, title: 'Dashboard', link: '/dashboard', id: 'dashboard' },
     {
-        icon: <TableViewIcon />, title: 'Table View', link: '/tableview/tableview1',
+        icon: <PlaylistAddIcon />, title: 'Thêm', link: '/addnew/them_ho_khau',
         collapse: [
-            { title: 'Table View 1', id: 'tableview1', linkCol: '/tableview/tableview1' },
-            { title: 'Table View 2', id: 'tableview2', linkCol: '/tableview/tableview2' }
+            { title: 'Thêm hộ khẩu', id: 'addnew1', linkCol: '/addnew/them_ho_khau' },
+            { title: 'Thêm nhân khẩu', id: 'addnew2', linkCol: '/addnew/them_nhan_khau' }
         ]
     },
-    { icon: <PlaylistAddIcon />, title: 'Add New', link: '/addnew', id: 'addnew' },
+    {
+        icon: <TableViewIcon />, title: 'Tra cứu', link: '/table/ho_khau', id: 'table',
+        collapse: [
+            { title: 'Hộ khẩu', id: 'table1', linkCol: '/table/ho_khau' },
+            { title: 'Nhân khẩu', id: 'table2', linkCol: '/table/nhan_khau' }
+        ]
+    },
     { icon: <NotificationsNoneIcon />, title: 'Notifications', link: '/notification', id: 'notification' },
     { icon: <AccountBoxIcon />, title: 'Account', link: '/account', id: 'account' },
     { icon: <LogoutIcon />, title: 'Logout', link: '/authentication', id: 'logout' },

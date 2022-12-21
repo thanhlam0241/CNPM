@@ -20,17 +20,30 @@
 
 html {
     font-size: 62.5%;
+    width: 100%;
     height: 100%;
 }
 body {
+    width: 100%;
     height: 100%;
     font-family: 'Montserrat', sans-serif;
     font-size: 1.6rem;
     line-height: 1.5;
     text-rendering: optimizeSpeed;
     color: var(--text-color);
+    background-attachment: fixed;
+    overflow-y: visible;
+    background-color: #eff1f4;
 }
-
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 7px;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
+}
 button,
 input,
 [tabindex] {
