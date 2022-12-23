@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/CNPM/static/css/main.75d7ef1e.css",
+    "main.js": "/CNPM/static/js/main.03ec89da.js",
+    "static/js/787.28cb0dcd.chunk.js": "/CNPM/static/js/787.28cb0dcd.chunk.js",
+    "static/media/back1.jpg": "/CNPM/static/media/back1.3f1160a741a9174a0b82.jpg",
+    "static/media/form.png": "/CNPM/static/media/form.9315ff617e98e5358d5b.png",
+    "index.html": "/CNPM/index.html",
+    "main.75d7ef1e.css.map": "/CNPM/static/css/main.75d7ef1e.css.map",
+    "main.03ec89da.js.map": "/CNPM/static/js/main.03ec89da.js.map",
+    "787.28cb0dcd.chunk.js.map": "/CNPM/static/js/787.28cb0dcd.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.75d7ef1e.css",
+    "static/js/main.03ec89da.js"
+  ]
+}
