@@ -9,23 +9,20 @@ import { Collapse, Button, TextField } from '@mui/material';
 
 //column field
 const columns = [
-    { field: 'id', headerName: 'ID', width: 40 },
-    { field: 'soHoKhau', headerName: 'Số hộ khẩu', width: 110 },
-    { field: 'noiThuongTru', headerName: 'Nơi thường trú', width: 140 },
-    { field: 'thanhVien', headerName: 'Danh sách các thành viên', width: 300 },
-    { field: 'chuHo', headerName: 'Chủ hộ', width: 150 },
-    { field: 'toPhuTrach', headerName: 'Tổ phụ trách', type: 'number', width: 150 },
+    { field: 'idenftification', headerName: 'CMND/CCCD', width: 140 },
+    { field: 'name', headerName: 'Họ và tên', width: 160 },
+    { field: 'birthday', headerName: 'Ngày sinh', type: 'date', width: 100 },
+    { field: 'gender', headerName: 'Giới tính', width: 70 },
+    { field: 'relationship', headerName: 'Quan hệ với chủ hộ', width: 150 },
+    { field: 'soHoKhau', headerName: 'Sổ hộ khẩu', type: 'number', width: 150 },
+    { field: 'toPhuTrach', headerName: 'Tổ phụ trách', type: 'number', width: 130 },
 ]
 //data in each row
 const rows = [
-    { id: 1, soHoKhau: '123432', noiThuongTru: 'Hà Nội', thanhVien: 'Nguyễn Văn A, Nguyễn Văn B', chuHo: 'Nguyễn Văn C', toPhuTrach: 1 },
-    { id: 2, soHoKhau: '123432', noiThuongTru: 'Hà Nội', thanhVien: 'Nguyễn Văn A, Nguyễn Văn B', chuHo: 'Nguyễn Văn C', toPhuTrach: 1 },
-    { id: 3, soHoKhau: '123432', noiThuongTru: 'Hà Nội', thanhVien: 'Nguyễn Văn A, Nguyễn Văn B', chuHo: 'Nguyễn Văn C', toPhuTrach: 1 },
-    { id: 4, soHoKhau: '123432', noiThuongTru: 'Hà Nội', thanhVien: 'Nguyễn Văn A, Nguyễn Văn B', chuHo: 'Nguyễn Văn C', toPhuTrach: 1 },
-    { id: 5, soHoKhau: '123432', noiThuongTru: 'Hà Nội', thanhVien: 'Nguyễn Văn A, Nguyễn Văn B', chuHo: 'Nguyễn Văn C', toPhuTrach: 1 },
-    { id: 6, soHoKhau: '123432', noiThuongTru: 'Hà Nội', thanhVien: 'Nguyễn Văn A, Nguyễn Văn B', chuHo: 'Nguyễn Văn C', toPhuTrach: 1 },
-    { id: 7, soHoKhau: '123432', noiThuongTru: 'Hà Nội', thanhVien: 'Nguyễn Văn A, Nguyễn Văn B', chuHo: 'Nguyễn Văn C', toPhuTrach: 1 },
-    { id: 8, soHoKhau: '123432', noiThuongTru: 'Hà Nội', thanhVien: 'Nguyễn Văn A, Nguyễn Văn B', chuHo: 'Nguyễn Văn C', toPhuTrach: 1 }
+    { id: 1, idenftification: '123456789', name: 'Nguyễn Văn A', birthday: '01/01/2002', gender: 'Nam', relationship: 'Chủ hộ', soHoKhau: '123456789', toPhuTrach: '123456789' },
+    { id: 2, idenftification: '123456787', name: 'Nguyễn Văn B', birthday: '01/01/2002', gender: 'Nam', relationship: 'Chủ hộ', soHoKhau: '123456789', toPhuTrach: '123456789' },
+    { id: 3, idenftification: '123454789', name: 'Nguyễn Văn C', birthday: '01/01/2002', gender: 'Nam', relationship: 'Chủ hộ', soHoKhau: '123456789', toPhuTrach: '123456789' },
+    { id: 4, idenftification: '123456769', name: 'Nguyễn Văn D', birthday: '01/01/2002', gender: 'Nam', relationship: 'Chủ hộ', soHoKhau: '123456789', toPhuTrach: '123456789' },
 ]
 
 export default function TableNhanKhau() {
@@ -89,9 +86,9 @@ export default function TableNhanKhau() {
 
             <Collapse sx={{ margin: '5px 0' }} in={visible} timeout="auto" >
                 <div>
-                    <TextField sx={{ margin: '0 5px 0 0' }} id="outlined-basic" label={columns[0].headerName}
+                    <TextField sx={{ margin: '0 5px 0 0' }} label={columns[0].headerName}
                         variant='filled' value={idField} disabled />
-                    <TextField sx={{ margin: '0 5px 0 0' }} id="outlined-basic" label={columns[1].headerName}
+                    <TextField sx={{ margin: '0 5px 0 0' }} label={columns[1].headerName}
                         variant='filled' value={deskField} onChange={(e) => setDeskField(e.target.value)} />
                 </div>
             </Collapse>

@@ -12,6 +12,7 @@ const cx = classNames.bind(styles);
 
 
 function Header({ text }) {
+    console.log('re-render header')
     return (
         <header >
             <div className={cx('header-head')}>

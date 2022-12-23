@@ -1,6 +1,8 @@
 import { NavLink } from "react-router-dom";
 import { useState, useCallback, useContext } from 'react'
 import styles from '~/components/Layout/DefaultLayout/Sidebar/Sidebar.module.scss'
+import KeyboardArrowUp from "@mui/icons-material/KeyboardArrowUp";
+import KeyboardArrowDown from "@mui/icons-material/KeyboardArrowDown";
 import classNames from 'classnames/bind';
 import SmoothCollapse from 'react-smooth-collapse';
 import { TitleContext } from '../../';
@@ -15,7 +17,8 @@ function CollapseButton({ buttonObject, isOpen }) {
         <>
             <NavLink to={buttonObject.link} className={cx('btn-side')} onClick={toggle}>
                 <span>{buttonObject.icon}</span>
-                <span className={isOpen ? cx('normal-btn') : cx('hide-btn')} >{isOpen && buttonObject.title}</span>
+                <span className={isOpen ? cx('normal-btn') : cx('hide-btn')} >{isOpen && (buttonObject.title)}</span>
+                <span>{isOpen && (!visible ? <KeyboardArrowDown /> : <KeyboardArrowUp />)}</span>
             </NavLink>
             {isOpen && (
                 <SmoothCollapse
@@ -36,6 +39,7 @@ function CollapseButton({ buttonObject, isOpen }) {
                                     }
                                 }}
                                 to={item.linkCol}>
+                                {/* <span>{item.icon}</span> */}
                                 <span className={cx('text-btn')}>{item.title}</span>
                             </NavLink>
                         })}

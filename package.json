@@ -18,6 +18,8 @@
         "web-vitals": "^2.1.4"
     },
     "scripts": {
+        "predeploy": "npm run build",
+        "deploy": "gh-pages -d build",
         "api": "json-server db.json -p 3001 --delay 1500",
         "start": "react-app-rewired start",
         "build": "react-app-rewired build",
@@ -52,10 +54,12 @@
         "babel-plugin-module-resolver": "^4.1.0",
         "classnames": "^2.3.2",
         "customize-cra": "^1.0.0",
+        "gh-pages": "^4.0.0",
         "json-server": "^0.17.1",
         "react-app-rewired": "^2.2.1",
         "react-router-dom": "^6.4.5",
         "react-smooth-collapse": "^2.1.2",
         "sass": "^1.56.2"
-    }
+    },
+    "homepage": "https://thanhlam0241.github.io/CNPM"
 }

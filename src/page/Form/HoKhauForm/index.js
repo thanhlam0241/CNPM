@@ -15,16 +15,16 @@ const genders = [
 const columns = [
     // { field: 'id', headerName: 'ID' }, //1
     { field: 'name', headerName: 'Họ và tên', width: 150, editable: true },//2
-    { field: 'alias', headerName: 'Bí danh', width: 100, editable: true },//3
+    { field: 'alias', headerName: 'Bí danh', width: 80, editable: true },//3
     { field: 'birthday', headerName: 'Ngày sinh', type: 'date', width: 100, editable: true },//4
-    { field: 'birthPlace', headerName: 'Nơi sinh', width: 100, editable: true },//5
-    { field: 'domicile', headerName: 'Nguyên quán', width: 150, editable: true },//6
-    { field: 'dantoc', headerName: 'Dân tộc', width: 100, editable: true },//7
+    { field: 'birthPlace', headerName: 'Nơi sinh', width: 90, editable: true },//5
+    { field: 'domicile', headerName: 'Nguyên quán', width: 120, editable: true },//6
+    { field: 'dantoc', headerName: 'Dân tộc', width: 80, editable: true },//7
     { field: 'citizenship', headerName: 'Quốc tịch', editable: true },//8
-    { field: 'career', headerName: 'Nghề nghiệp', width: 200, editable: true },//9
-    { field: 'workplace', headerName: 'Nơi làm việc', width: 150, editable: true },//10
+    { field: 'career', headerName: 'Nghề nghiệp', width: 100, editable: true },//9
+    { field: 'workplace', headerName: 'Nơi làm việc', width: 120, editable: true },//10
     { field: 'identification', headerName: 'CCCD/CMND', width: 100, editable: true },//11
-    { field: 'relationship', headerName: 'Quan hệ với chủ hộ', width: 100, editable: true },//12,
+    { field: 'relationship', headerName: 'Quan hệ với chủ hộ', width: 140, editable: true },//12,
     { field: 'gender', headerName: 'Giới tính', editable: true }//13,
 
 ]
@@ -202,10 +202,11 @@ export default function FormHKComponent() {
                     </Fab>
                     <Collapse sx={{ margin: '5px 0' }} in={visible} timeout="auto" >
                         <div style={{ display: 'flex', flexFlow: 'row wrap' }}>
-                            <TextField inputRef={nameRef} label="Họ và tên" variant="outlined" />
-                            <TextField inputRef={aliasRef} label="Bí danh" variant="outlined" />
+                            <TextField required inputRef={nameRef} label="Họ và tên" variant="outlined" />
+                            <TextField required inputRef={aliasRef} label="Bí danh" variant="outlined" />
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <DatePicker
+                                    required
                                     sx={{ fontSize: 12 }}
                                     label="Ngày sinh"
                                     value={birthday}
@@ -216,15 +217,15 @@ export default function FormHKComponent() {
                                     renderInput={(params) => <TextField {...params} />}
                                 />
                             </LocalizationProvider>
-                            <TextField inputRef={birthPlaceRef} label="Nơi sinh" variant="outlined" />
-                            <TextField inputRef={domicileRef} label="Nguyên quán" variant="outlined" />
-                            <TextField inputRef={dantocRef} label="Dân tộc" variant="outlined" />
-                            <TextField inputRef={citizenshipRef} label="Quốc tịch" variant="outlined" />
-                            <TextField inputRef={careerRef} label="Nghề nghiệp" variant="outlined" />
-                            <TextField inputRef={workplaceRef} label="Nơi làm việc" variant="outlined" />
-                            <TextField inputRef={identificationRef} label="CMND/CCCD" variant="outlined" />
-                            <TextField inputRef={relationshipRef} label="Quan hệ với chủ hộ" variant="outlined" />
-                            <TextField
+                            <TextField required inputRef={birthPlaceRef} label="Nơi sinh" variant="outlined" />
+                            <TextField required inputRef={domicileRef} label="Nguyên quán" variant="outlined" />
+                            <TextField required inputRef={dantocRef} label="Dân tộc" variant="outlined" />
+                            <TextField required inputRef={citizenshipRef} label="Quốc tịch" variant="outlined" />
+                            <TextField required inputRef={careerRef} label="Nghề nghiệp" variant="outlined" />
+                            <TextField required inputRef={workplaceRef} label="Nơi làm việc" variant="outlined" />
+                            <TextField required inputRef={identificationRef} label="CMND/CCCD" variant="outlined" />
+                            <TextField required inputRef={relationshipRef} label="Quan hệ với chủ hộ" variant="outlined" />
+                            <TextField required
                                 id="standard-select-gender"
                                 select
                                 label="Giới tính"

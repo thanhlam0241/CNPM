@@ -1,29 +1,57 @@
 import styles from './Sidebar.module.scss';
-import { useState, useContext } from 'react';
+import { useState, useContext, useCallback } from 'react';
 //icon
 import MenuIcon from '@mui/icons-material/Menu';
+import { PushPinOutlined } from '@mui/icons-material'
 import buttons from './ButtonNav';
 import classNames from 'classnames/bind';
 import { NavLink } from "react-router-dom";
 import CollapseButton from './Collapse';
 import { TitleContext } from '../';
+import { AuthContext } from '~/components/AuthenProvider'
 const cx = classNames.bind(styles);
 
 function Sidebar() {
+    //authenticate management
     const changer = useContext(TitleContext);
-    const [open, setOpen] = useState(true);
-    const toggle = (e) => {
-        setOpen(!open);
+    const { setAuth } = useContext(AuthContext);
+    const handleAuth = () => {
+        setAuth({});
     }
+
+    const [open, setOpen] = useState(true);
+    const [pin, setPin] = useState(false);
+
+    const toggle = () => {
+        setTimeout(() => {
+            setOpen(!open);
+            console.log('Toggle sidebar')
+        }, 100)
+    }
+
+    const pinToggle = () => {
+        setPin(!pin);
+    }
+
+    const fixedFunc = useCallback(() => { }, []);
     return (
-        <div className={cx('side-bar')}>
-            <NavLink className={cx('btn-menu')} onClick={toggle}>
-                <span><MenuIcon /></span>
-                <span className={open ? cx('normal-btn') : cx('hide-btn')} >{open && 'Menu'}</span>
+        <div className={cx('side-bar')} onMouseOver={(pin === true) ? fixedFunc : (open === false) ? toggle : fixedFunc} onMouseLeave={(pin === true) ? fixedFunc : (open === true) ? toggle : fixedFunc
+        } >
+            <NavLink className={cx('btn-menu')} onClick={pinToggle} >
+                <span><PushPinOutlined /></span>
+                <span className={open ? cx('normal-btn') : cx('hide-btn')} >{open && 'Pin'}</span>
             </NavLink>
             <hr />
             {buttons.map((button) => {
                 if (!button.hasOwnProperty('collapse')) {
+                    if (button.isLogout) {
+                        return (
+                            <NavLink key={button.id} onClick={handleAuth} className={cx('btn-side')} to={button.link} >
+                                <span key={button.id + 'span1'} >{button.icon}</span>
+                                <span key={button.id + 'span2'} className={open ? cx('normal-btn') : cx('hide-btn')}>{open && button.title}</span>
+                            </NavLink>
+                        )
+                    }
                     return (
                         <NavLink key={button.id} className={({ isActive }) => {
                             if (isActive) {

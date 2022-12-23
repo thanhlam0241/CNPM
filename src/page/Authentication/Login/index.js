@@ -13,7 +13,7 @@ import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import Input from '@mui/material/Input';
 
 //api
-import { AuthContext } from '../AuthenProvider'
+import { AuthContext } from '../../../components/AuthenProvider'
 import axios from '../../../services/api/axios'
 //sass
 import styles from './Login.module.scss'
@@ -34,7 +34,6 @@ export default function Login({ act }) {
     const [errMsg, setErrMsg] = useState('');
     const [start, setStart] = useState(false);
     const navigate = useNavigate();
-
     useEffect(() => {
         userRef.current.focus();
     }, [])

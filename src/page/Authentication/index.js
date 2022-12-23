@@ -1,6 +1,5 @@
 import Login from './Login';
 import Register from './Register';
-import { AuthProvider } from './AuthenProvider/index.js';
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
@@ -13,8 +12,6 @@ import styles from './Authentication.module.scss';
 import { useState } from 'react';
 
 const cx = classNames.bind(styles);
-
-
 
 function Authentication() {
     const [value, setValue] = useState('1');
@@ -34,9 +31,7 @@ function Authentication() {
                         </TabList>
                     </Box>
                     <TabPanel value="1">
-                        <AuthProvider >
-                            <Login act={setValue} />
-                        </AuthProvider>
+                        <Login act={setValue} />
                     </TabPanel>
                     <TabPanel value="2"><Register act={setValue} /></TabPanel>
                 </TabContext>

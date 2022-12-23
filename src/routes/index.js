@@ -1,14 +1,15 @@
 //page
-import { NKTable, HKTable, TableEdit, ToolbarGrid } from '~/page/Table'
-import { HKForm, NKForm } from '~/page/Form'
-import DashboardComponent from '~/page/Dashboard'
-import Authentication from '~/page/Authentication'
+import { NKTable, HKTable } from '~/page/Table';
+import { HKForm, NKForm } from '~/page/Form';
+import DashboardComponent from '~/page/Dashboard';
+import Authentication from '~/page/Authentication';
+import Profile from '~/page/Account';
+// import ErrorLogin from '~/page/Error'
 //layout
 import DefaultLayout from '~/components/Layout/DefaultLayout'
 import AuthenticationLayout from '~/components/Layout/AuthenticationLayout'
 
 const routes = [
-    { path: '/', element: Authentication, layout: AuthenticationLayout, id: 'default' },
     { path: '/dashboard', element: DashboardComponent, layout: DefaultLayout, id: 'db' },
     {
         path: '/addnew',
@@ -27,9 +28,11 @@ const routes = [
         layout: DefaultLayout, id: 'add'
     },
     { path: '/notification', element: HKForm, layout: DefaultLayout, id: 'noti' },
-    { path: '/account', element: NKForm, layout: DefaultLayout, id: 'acc' },
+    { path: '/profile', element: Profile, layout: DefaultLayout, id: 'pro' },
     { path: '/logout', element: NKTable, layout: DefaultLayout, id: 'log' },
-    { path: '/authentication', element: Authentication, layout: AuthenticationLayout, id: 'auth' }
+    { path: '/error', element: Error, layout: DefaultLayout, id: 'log' },
+    // { path: '/authentication', element: Authentication, layout: AuthenticationLayout, id: 'auth' }
 ]
-
-export { routes }
+const loginRoute = { path: '/', element: Authentication, layout: AuthenticationLayout, id: 'default' };
+// const errorRoute = { path: '/error', element: ErrorLogin, layout: AuthenticationLayout, id: 'error' };
+export { routes, loginRoute }

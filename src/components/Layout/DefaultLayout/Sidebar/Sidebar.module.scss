@@ -33,7 +33,7 @@
     cursor: pointer;
     transition: all 0.3s ease-in-out;
     border-radius: 6px;
-    padding: 5px 8px;
+    padding: 5px 10px;
     &:hover {
         background-color: var(--sidebar-btn-color);
     }
@@ -52,20 +52,37 @@
     width: 0;
 }
 .btn-side-active {
-    max-width: 20rem;
+    max-width: 25rem;
     background-color: #3791ee;
-    display: flex;
+    display: block;
     align-items: center;
     justify-content: flex-start;
     border: none;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
     border-radius: 6px;
-    padding: 5px 8px;
+    padding: 5px 10px;
     span {
         color: var(--sidebar-text-color);
     }
 }
+.btn-menu {
+    max-width: 25rem;
+    background-color: var(--color-side);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    padding: 5px 10px;
+    color: var(--sidebar-text-color);
+    span {
+        color: var(--sidebar-text-color);
+    }
+}
+
 .nav-group-collapse {
     display: flex;
     flex-direction: column;
@@ -91,22 +108,6 @@
     padding: 5px;
     border-radius: 5px;
     background-color: #3791ee;
-    span {
-        color: var(--sidebar-text-color);
-    }
-}
-.btn-menu {
-    max-width: 20rem;
-    background-color: var(--color-side);
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    justify-content: flex-start;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-    padding: 10px 5px;
-    color: var(--sidebar-text-color);
     span {
         color: var(--sidebar-text-color);
     }
