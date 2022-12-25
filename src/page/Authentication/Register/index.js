@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 //material-ui
 import { Button, FormControl } from '@mui/material'
 import InputLabel from '@mui/material/InputLabel';
@@ -9,6 +9,8 @@ import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import Input from '@mui/material/Input';
 //api
 import axios, { axiosConfig } from '../../../services/api/axios'
+//context 
+import { AuthContext } from '~/components/AuthenProvider'
 //style
 import styles from './Register.module.scss'
 import classNames from 'classnames/bind'
@@ -19,6 +21,9 @@ const REGISTER_URL = '/accounts';
 export default function Signup({ act }) {
     //use to navigate
     const navigate = useNavigate();
+
+    //auth context
+    const { setAuth } = useContext(AuthContext);
 
     //user state to register
     const [username, setUserName] = useState('');
@@ -46,7 +51,7 @@ export default function Signup({ act }) {
                     username: username,
                     password: password
                 }
-                console.log(data)
+                setAuth(data);
                 await axios.post(`${REGISTER_URL}`, data, axiosConfig);
                 setTimeout(() => navigate('/dashboard'), 100)
                 setMsg('Register successfully');

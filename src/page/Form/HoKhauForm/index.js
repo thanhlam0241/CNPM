@@ -145,10 +145,10 @@ export default function FormHKComponent() {
                 autoComplete="off"
             >
                 <div className={cx('input-text-area')}>
-                    <TextField required id="outlined-basic" label="Số hộ khẩu" variant="outlined" />
-                    <TextField required id="outlined-basic" label="Nơi thường trú" variant="outlined" />
-                    <TextField required id="outlined-basic" label="Tổ phụ trách" variant="outlined" />
-                    <TextField required id="outlined-basic" label="Họ và tên chủ hộ" variant="outlined" />
+                    <TextField required id="outlined-basic1" label="Số hộ khẩu" variant="outlined" />
+                    <TextField required id="outlined-basic2" label="Nơi thường trú" variant="outlined" />
+                    <TextField required id="outlined-basic3" label="Tổ phụ trách" variant="outlined" />
+                    <TextField required id="outlined-basic4" label="Họ và tên chủ hộ" variant="outlined" />
                 </div>
                 <div className={cx('input-image-area')}>
                     <label htmlFor="upload-photo" style={{ marginLeft: 10 }}>

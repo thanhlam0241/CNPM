@@ -4,7 +4,6 @@ import { AuthContext } from './components/AuthenProvider';
 import { useContext } from 'react';
 function App() {
   const { auth } = useContext(AuthContext);
-  console.log(auth === {})
   return (
     <Router >
       <Routes>

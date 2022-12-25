@@ -8,19 +8,18 @@ import classNames from 'classnames/bind';
 import { NavLink } from "react-router-dom";
 import CollapseButton from './Collapse';
 import { TitleContext } from '../';
-import { AuthContext } from '~/components/AuthenProvider'
+// import { AuthContext } from '~/components/AuthenProvider'
 const cx = classNames.bind(styles);
 
 function Sidebar() {
     //authenticate management
     const changer = useContext(TitleContext);
-    const { setAuth } = useContext(AuthContext);
     const handleAuth = () => {
-        setAuth({});
+        localStorage.removeItem('myUserNameReactApp');
     }
 
     const [open, setOpen] = useState(true);
-    const [pin, setPin] = useState(false);
+    const [pin, setPin] = useState(true);
 
     const toggle = () => {
         setTimeout(() => {
@@ -32,6 +31,8 @@ function Sidebar() {
     const pinToggle = () => {
         setPin(!pin);
     }
+
+
 
     const fixedFunc = useCallback(() => { }, []);
     return (

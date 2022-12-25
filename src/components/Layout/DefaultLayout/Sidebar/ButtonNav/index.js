@@ -7,6 +7,10 @@ import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { FindInPage } from '@mui/icons-material';
 
+const loggout = () => {
+    localStorage.removeItem('myUserNameReactApp');
+}
+
 const buttons = [
     { icon: <DashboardIcon />, title: 'Dashboard', link: '/dashboard', id: 'dashboard' },
     { icon: <AccountBoxIcon />, title: 'Profile', link: '/profile', id: 'profile' },
@@ -27,7 +31,7 @@ const buttons = [
     },
     { icon: <NotificationsNoneIcon />, title: 'Notifications', link: '/notification', id: 'notification' },
 
-    { icon: <LogoutIcon />, title: 'Logout', link: '/', id: 'logout', isLogout: true },
+    { icon: <LogoutIcon />, title: 'Logout', link: '/', id: 'logout', isLogout: true, action: loggout },
 ]
 
 export default buttons;
