@@ -4,6 +4,7 @@ import { HKForm, NKForm } from '~/page/Form';
 import DashboardComponent from '~/page/Dashboard';
 import Authentication from '~/page/Authentication';
 import Profile from '~/page/Account';
+import Start from '~/page/StartPage';
 // import ErrorLogin from '~/page/Error'
 //layout
 import DefaultLayout from '~/components/Layout/DefaultLayout'
@@ -31,8 +32,12 @@ const routes = [
     { path: '/profile', element: Profile, layout: DefaultLayout, id: 'pro' },
     { path: '/logout', element: NKTable, layout: DefaultLayout, id: 'log' },
     { path: '/error', element: Error, layout: DefaultLayout, id: 'log' },
-    // { path: '/authentication', element: Authentication, layout: AuthenticationLayout, id: 'auth' }
+
 ]
-const loginRoute = { path: '/', element: Authentication, layout: AuthenticationLayout, id: 'default' };
+const loginRoute = [
+    { path: '/', element: Start, layout: AuthenticationLayout, id: 'start' },
+    {
+        path: '/authenticate', element: Authentication, layout: AuthenticationLayout, id: 'default'
+    }];
 // const errorRoute = { path: '/error', element: ErrorLogin, layout: AuthenticationLayout, id: 'error' };
 export { routes, loginRoute }

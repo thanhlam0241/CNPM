@@ -1,18 +1,17 @@
 import styles from './Header.module.scss';
 import classNames from 'classnames/bind';
 import { NavLink } from "react-router-dom";
+import fuhua from '~/assets/avatars/fuhua.png';
 //icons
 import HomeIcon from '@mui/icons-material/Home';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { Avatar } from '@mui/material';
-import { deepOrange, deepPurple } from '@mui/material/colors';
 const cx = classNames.bind(styles);
 
 
 function Header({ text }) {
-    console.log('re-render header')
     return (
         <header >
             <div className={cx('header-head')}>
@@ -32,7 +31,7 @@ function Header({ text }) {
                 </button>
             </div>
             <div className={cx('actions')}>
-                <Avatar sx={{ bgcolor: deepOrange[500] }}>N</Avatar>
+                <Avatar src={fuhua} />
             </div>
         </ header>
     )

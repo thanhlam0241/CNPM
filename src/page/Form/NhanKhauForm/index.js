@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { Fab, MenuItem, Box, TextField } from '@mui/material';
+import { useState, useEffect, useCallback } from 'react';
+import { Fab, MenuItem, Box, TextField, Button } from '@mui/material';
 
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -23,13 +23,15 @@ export default function FormNKComponent() {
         e.target.value = null;
     }
     useEffect(() => {
-
         //clean up function
         return () => {
             img && URL.revokeObjectURL(img.preview);
             //remvove the temporary url if avatar exists
         }
-    }, [img])
+    }, [img]);
+    const handleRequestFullScreen = useCallback((e) => {
+        e.target.requestFullscreen();
+    }, []);
     return (
         <Box
             component="form"
@@ -39,9 +41,9 @@ export default function FormNKComponent() {
             noValidate
             autoComplete="off"
         >
-            <TextField required id="outlined-basic" label="Họ và tên" variant="outlined" />
-            <TextField required id="outlined-basic" label="Bí danh" variant="outlined" />
-            <TextField required id="outlined-basic" label="Họ và tên chủ hộ" variant="outlined" />
+            <TextField required label="Họ và tên" variant="outlined" />
+            <TextField required label="Bí danh" variant="outlined" />
+            <TextField required label="Họ và tên chủ hộ" variant="outlined" />
             <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
                     required
@@ -54,15 +56,15 @@ export default function FormNKComponent() {
                     renderInput={(params) => <TextField {...params} />}
                 />
             </LocalizationProvider>
-            <TextField required id="outlined-basic" label="Nơi sinh" variant="outlined" />
-            <TextField required id="outlined-basic" label="Nguyên quán" variant="outlined" />
-            <TextField required id="outlined-basic" label="Dân tộc" variant="outlined" />
-            <TextField required id="outlined-basic" label="Quốc tịch" variant="outlined" />
-            <TextField required id="outlined-basic" label="Nghề nghiệp" variant="outlined" />
-            <TextField required id="outlined-basic" label="Nơi làm việc" variant="outlined" />
-            <TextField required id="outlined-basic" label="CMND/CCCD" variant="outlined" />
-            <TextField required id="outlined-basic" label="Quan hệ với chủ hộ" variant="outlined" />
-            <TextField required id="outlined-basic" label="Sổ hộ khẩu" variant="outlined" />
+            <TextField required label="Nơi sinh" variant="outlined" />
+            <TextField required label="Nguyên quán" variant="outlined" />
+            <TextField required label="Dân tộc" variant="outlined" />
+            <TextField required label="Quốc tịch" variant="outlined" />
+            <TextField required label="Nghề nghiệp" variant="outlined" />
+            <TextField required label="Nơi làm việc" variant="outlined" />
+            <TextField required label="CMND/CCCD" variant="outlined" />
+            <TextField required label="Quan hệ với chủ hộ" variant="outlined" />
+            <TextField required label="Sổ hộ khẩu" variant="outlined" />
             <TextField
                 id="standard-select-gender"
                 select
@@ -77,10 +79,10 @@ export default function FormNKComponent() {
                     </MenuItem>
                 ))}
             </TextField>
-            <TextField required id="outlined-basic" label="Quan hệ với chủ hộ" variant="outlined" />
-            <TextField required id="outlined-basic" label="Trình độ học vấn" variant="outlined" />
-            <TextField id="outlined-basic" label="Tiền án" variant="outlined" />
-            <TextField id="outlined-basic" label="Lý do chuyển đến" variant="outlined" />
+            <TextField required label="Quan hệ với chủ hộ" variant="outlined" />
+            <TextField required label="Trình độ học vấn" variant="outlined" />
+            <TextField label="Tiền án" variant="outlined" />
+            <TextField label="Lý do chuyển đến" variant="outlined" />
             <div className={cx('input-image-area')}>
                 <label htmlFor="upload-photo" style={{ marginLeft: 10 }}>
                     <input
@@ -106,12 +108,14 @@ export default function FormNKComponent() {
                         <div>
                             <img src={img.preview}
                                 alt="avatar"
-                                width="150" />
+                                style={{ cursor: 'pointer', width: "300px", margin: 5 }}
+                                onClick={handleRequestFullScreen} />
                         </div>
                     )
                 }
 
             </div>
+            <Button style={{ margin: '0 auto', display: 'block' }} variant="contained">Gửi</Button>
         </Box>
     );
 }

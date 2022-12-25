@@ -30,8 +30,7 @@ const buttons = [
         ]
     },
     { icon: <NotificationsNoneIcon />, title: 'Notifications', link: '/notification', id: 'notification' },
-
-    { icon: <LogoutIcon />, title: 'Logout', link: '/', id: 'logout', isLogout: true, action: loggout },
+    { icon: <LogoutIcon />, title: 'Logout', link: '/authenticate', id: 'logout', isLogout: true, action: loggout },
 ]
 
 export default buttons;

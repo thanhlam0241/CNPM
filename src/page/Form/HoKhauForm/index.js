@@ -116,20 +116,25 @@ export default function FormHKComponent() {
             setVisibleDes(false)
         }
     }, [visible]);
+    const handleRequestFullScreen = useCallback((e) => {
+        e.target.requestFullscreen();
+    }, []);
 
     const [arrImg, setArrImg] = useState([]);
-    const handleFileImage = (e) => {
-        setArrImg(prev => [...prev, ...e.target.files]);
+    const handleFileImage = useCallback((e) => {
+        let files = [...e.target.files].map((file) => {
+            file.preview = URL.createObjectURL(file);
+            return file;
+        })
+        setArrImg([...arrImg, ...files]);
         e.target.value = null;
-    }
-    // useEffect(() => {
-
-    //     //clean up function
-    //     return () => {
-    //         arrImg && URL.revokeObjectURL();
-    //         //remvove the temporary url if avatar exists
-    //     }
-    // }, [arrImg])
+    }, [arrImg]);
+    useEffect(() => {
+        return () => {
+            arrImg && arrImg.forEach((file) => URL.revokeObjectURL(file.preview))
+            //remvove the temporary url if avatar exists
+        }
+    }, [arrImg])
     return (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <Box
@@ -137,9 +142,7 @@ export default function FormHKComponent() {
                 sx={{
                     '& .MuiTextField-root': { m: 1, width: '25ch' },
                     display: 'flex',
-                    flexDirection: 'column',
-
-
+                    flexDirection: 'column'
                 }}
                 noValidate
                 autoComplete="off"
@@ -172,7 +175,10 @@ export default function FormHKComponent() {
                     </label>
                     {(arrImg.length > 0) && <div className={cx('img-render')}>{arrImg.map((item, index) => (
                         <div key={"image" + index} style={{ position: 'relative', display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center', width: 'auto' }}>
-                            <img src={URL.createObjectURL(item)} style={{ width: 'auto', height: '150px', marginRight: 5 }} alt="evidence" />
+                            <img src={item.preview}
+                                style={{ width: 'auto', height: '150px', marginRight: 5, cursor: 'pointer' }}
+                                alt="evidence"
+                                onClick={handleRequestFullScreen} />
                             <Fab
                                 sx={{ position: 'absolute', right: -5, top: -7, backgroundColor: 'transparent' }}
                                 color="error"
