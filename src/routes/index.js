@@ -5,13 +5,14 @@ import DashboardComponent from '~/page/Dashboard';
 import Authentication from '~/page/Authentication';
 import Profile from '~/page/Account';
 import Start from '~/page/StartPage';
+import Notification from '~/page/Notification';
 // import ErrorLogin from '~/page/Error'
 //layout
 import DefaultLayout from '~/components/Layout/DefaultLayout'
 import AuthenticationLayout from '~/components/Layout/AuthenticationLayout'
 
 const routes = [
-    { path: '/dashboard', element: DashboardComponent, layout: DefaultLayout, id: 'db' },
+    // { path: '/dashboard', element: DashboardComponent, layout: DefaultLayout, id: 'db' },
     {
         path: '/addnew',
         subRoutes: [
@@ -28,7 +29,7 @@ const routes = [
         ],
         layout: DefaultLayout, id: 'add'
     },
-    { path: '/notification', element: HKForm, layout: DefaultLayout, id: 'noti' },
+    { path: '/notification', element: Notification, layout: DefaultLayout, id: 'noti' },
     { path: '/profile', element: Profile, layout: DefaultLayout, id: 'pro' },
     { path: '/logout', element: NKTable, layout: DefaultLayout, id: 'log' },
     { path: '/error', element: Error, layout: DefaultLayout, id: 'log' },

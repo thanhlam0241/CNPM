@@ -3,30 +3,34 @@
 }
 
 .profile-setting {
-    background-color: var(--bgc-account);
-    width: 100%;
+    background-color: var(--background-color-default);
+    width: 40%;
     height: 80%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     border: 1px solid #eaeaea;
     border-radius: 4px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    padding: 40px 20px 50px 20px;
+    padding: 50px 20px 0px 20px;
+    margin: 0 auto;
 }
 
 .profile-info {
     width: 100%;
-    position: relative;
-    background-color: var(--bgc-account);
+    background-color: var(--background-color-default);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
     padding: 10px 60px;
-    gap: 50px;
+    gap: 60px;
 }
 h4 {
     color: blue;
+}
+
+.MuiTabPanel-root {
+    margin: 0 auto;
 }

@@ -12,7 +12,7 @@ const loggout = () => {
 }
 
 const buttons = [
-    { icon: <DashboardIcon />, title: 'Dashboard', link: '/dashboard', id: 'dashboard' },
+    // { icon: <DashboardIcon />, title: 'Dashboard', link: '/dashboard', id: 'dashboard' },
     { icon: <AccountBoxIcon />, title: 'Profile', link: '/profile', id: 'profile' },
     {
         icon: <PlaylistAddIcon />, title: 'Thêm', link: '/addnew/them_ho_khau',

@@ -53,7 +53,7 @@ export default function Signup({ act }) {
                 }
                 setAuth(data);
                 await axios.post(`${REGISTER_URL}`, data, axiosConfig);
-                setTimeout(() => navigate('/dashboard'), 100)
+                setTimeout(() => navigate('/profile'), 100)
                 setMsg('Register successfully');
             }
         }

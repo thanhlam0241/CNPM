@@ -1,7 +1,11 @@
 import { useState, useEffect } from 'react';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import { Collapse, Button, TextField } from '@mui/material';
-
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 // import styles from './Table1.module.scss';
 // import classNames from 'classnames/bind';
 
@@ -17,7 +21,7 @@ const columns = [
     { field: 'toPhuTrach', headerName: 'Tổ phụ trách', type: 'number', width: 150 },
 ]
 //data in each row
-const rows = [
+const rowInit = [
     { id: 1, soHoKhau: '123432', noiThuongTru: 'Hà Nội', thanhVien: 'Nguyễn Văn A, Nguyễn Văn B', chuHo: 'Nguyễn Văn C', toPhuTrach: 1 },
     { id: 2, soHoKhau: '123432', noiThuongTru: 'Hà Nội', thanhVien: 'Nguyễn Văn A, Nguyễn Văn B', chuHo: 'Nguyễn Văn C', toPhuTrach: 1 },
     { id: 3, soHoKhau: '123432', noiThuongTru: 'Hà Nội', thanhVien: 'Nguyễn Văn A, Nguyễn Văn B', chuHo: 'Nguyễn Văn C', toPhuTrach: 1 },
@@ -29,11 +33,28 @@ const rows = [
 ]
 
 export default function TableHoKhau() {
-    const [selectedRows, setSelectedRows] = useState(rows[0]);
+    const [rows, setRows] = useState(rowInit);
     const [visible, setVisible] = useState(false);
     const [columnsTable, setColumsTable] = useState(columns);
-    const [idField, setIdField] = useState(rows[0].id);
-    const [deskField, setDeskField] = useState(rows[0].desk);
+    const [idField, setIdField] = useState();
+    const [deskField, setDeskField] = useState();
+    const [openAlert, setOpenAlert] = useState(false);
+    const [deleteId, setDeleteId] = useState();
+    const handleClickOpen = () => {
+        setOpenAlert(true);
+    };
+
+    const handleClose = () => {
+        setDeleteId(null);
+        setOpenAlert(false);
+    };
+    const handleAgree = () => {
+        setRows(prev => {
+            return prev.filter(row => row.id !== deleteId)
+        });
+        setDeleteId(null);
+        setOpenAlert(false);
+    };
     useEffect(() => {
         const actionFirst = setTimeout(() => {
             setColumsTable([
@@ -55,15 +76,28 @@ export default function TableHoKhau() {
                                     (c) => (thisRow[c.field] = params.getValue(params.id, c.field)),
                                 );
                             setVisible(true);
-                            setSelectedRows(thisRow);
                             setIdField(thisRow.id);
                             setDeskField(thisRow.desk);
                         };
+                        const onClickRemove = (e) => {
+
+                            console.log('...')
+                            e.stopPropagation();
+                            const api = params.api;
+                            const thisRow = {};
+                            api.getAllColumns()
+                                .filter((c) => c.field !== '__check__' && !!c)
+                                .forEach(
+                                    (c) => (thisRow[c.field] = params.getValue(params.id, c.field)),
+                                );
+                            setDeleteId(thisRow.id);
+                            handleClickOpen();
+                        }
                         return (< div style={{ display: 'flex', alignItems: 'stretch', flexDirection: 'row', padding: '2px 0', margin: '0px 2px' }}>
                             <Button variant="contained" color="primary" onClick={onClick}>
                                 Edit
                             </Button>
-                            <Button variant="contained" color="error" onClick={onClick}>
+                            <Button variant="contained" color="error" onClick={onClickRemove}>
                                 Delete
                             </Button>
                         </ div >)
@@ -98,6 +132,8 @@ export default function TableHoKhau() {
 
             <DataGrid
                 sx={{ fontSize: 15 }}
+                editMode="row"
+                checkboxSelection
                 rows={rows}
                 columns={columnsTable}
                 components={{
@@ -111,6 +147,29 @@ export default function TableHoKhau() {
                 }}
                 disableSelectionOnClick
             />
+            <Dialog
+
+                open={openAlert}
+                onClose={handleClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle sx={{ fontSize: 20 }} id="alert-dialog-title">
+                    {"Xóa hộ khẩu ?"}
+                </DialogTitle>
+                <DialogContent>
+                    <DialogContentText sx={{ fontSize: 15 }} id="alert-dialog-description">
+                        Thao tác này sẽ xóa hộ khẩu này
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button sx={{ fontSize: 15 }} onClick={handleClose}>Suy nghĩ lại</Button>
+                    <Button sx={{ fontSize: 15 }} onClick={handleAgree} autoFocus>
+                        Đồng ý
+                    </Button>
+                </DialogActions>
+            </Dialog>
+
         </div>
     );
 }

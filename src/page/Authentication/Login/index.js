@@ -53,7 +53,7 @@ export default function Login({ act }) {
             else {
                 setAuth(user);
                 setErrMsg('Login successfully')
-                setTimeout(() => navigate('/dashboard'), 100)
+                setTimeout(() => navigate('/profile'), 100)
                 setUserName('');
                 setPassword('');
             }

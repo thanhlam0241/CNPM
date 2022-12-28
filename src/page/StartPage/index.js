@@ -14,7 +14,7 @@ function Start() {
         if (state === 0) {
             if (auth.hasOwnProperty('password') && auth.hasOwnProperty('username')) {
                 const b = setTimeout(() => {
-                    navigate('/dashboard');
+                    navigate('/profile');
                     clearTimeout(b);
                 }, 1000);
 
