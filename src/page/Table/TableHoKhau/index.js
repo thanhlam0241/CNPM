@@ -133,7 +133,6 @@ export default function TableHoKhau() {
             <DataGrid
                 sx={{ fontSize: 15 }}
                 editMode="row"
-                checkboxSelection
                 rows={rows}
                 columns={columnsTable}
                 components={{

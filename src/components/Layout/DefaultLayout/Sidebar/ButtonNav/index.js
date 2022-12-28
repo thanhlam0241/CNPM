@@ -13,7 +13,7 @@ const loggout = () => {
 
 const buttons = [
     // { icon: <DashboardIcon />, title: 'Dashboard', link: '/dashboard', id: 'dashboard' },
-    { icon: <AccountBoxIcon />, title: 'Profile', link: '/profile', id: 'profile' },
+    { icon: <AccountBoxIcon />, title: 'Tài khoản', link: '/profile', id: 'profile' },
     {
         icon: <PlaylistAddIcon />, title: 'Thêm', link: '/addnew/them_ho_khau',
         collapse: [
@@ -29,8 +29,8 @@ const buttons = [
             { icon: <TableViewIcon />, title: 'Nhân khẩu', id: 'table2', linkCol: '/table/nhan_khau' }
         ]
     },
-    { icon: <NotificationsNoneIcon />, title: 'Notifications', link: '/notification', id: 'notification' },
-    { icon: <LogoutIcon />, title: 'Logout', link: '/authenticate', id: 'logout', isLogout: true, action: loggout },
+    { icon: <NotificationsNoneIcon />, title: 'Thông báo', link: '/notification', id: 'notification' },
+    { icon: <LogoutIcon />, title: 'Đăng xuất', link: '/authenticate', id: 'logout', isLogout: true, action: loggout },
 ]
 
 export default buttons;

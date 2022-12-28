@@ -1,11 +1,11 @@
 import styles from './ProfileUser.module.scss';
 import classNames from 'classnames/bind';
 
-import { FormControl, Input, InputLabel, Button } from '@mui/material';
+import { FormControl, Input, InputLabel } from '@mui/material';
 
 import axios from '~/services/api/axios';
 import { AuthContext } from '~/components/AuthenProvider'
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 
 const cx = classNames.bind(styles);
 
@@ -53,7 +53,12 @@ export default function User() {
             setConfirmPassword('');
         }
     }
-
+    useEffect(() => {
+        const a = setTimeout(() => {
+            setSuccess(false);
+        }, 3000);
+        return () => clearTimeout(a);
+    }, [success])
     return (
         <div className={cx('profile-setting')}>
             {success && <h4 >Change password successfully</h4>}
@@ -83,7 +88,13 @@ export default function User() {
                     />
                 </FormControl>
             </div>
-            <Button color='primary' variant="contained" sx={{ marginTop: 20, fontSize: 15, zIndex: 1 }} onClick={handleUpdate}>Cập nhật</Button>
+            <div>
+                <button
+                    className={cx('btn-update')}
+                    onClick={handleUpdate}>
+                    Cập nhật
+                </button>
+            </div>
         </div>
     )
 }

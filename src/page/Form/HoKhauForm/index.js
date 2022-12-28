@@ -84,7 +84,7 @@ export default function FormHKComponent() {
             setVisibleDes(false)
         }
     }, [visible])
-    const handleAddNK = useCallback(() => {
+    const handleAddNK = () => {
         setRows(prev => [...prev, {
             id: prev.length + 1,
             name: nameRef.current.value,
@@ -115,7 +115,7 @@ export default function FormHKComponent() {
             setVisible(false);
             setVisibleDes(false)
         }
-    }, [visible]);
+    };
     const handleRequestFullScreen = useCallback((e) => {
         e.target.requestFullscreen();
     }, []);

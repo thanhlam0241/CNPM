@@ -12,12 +12,12 @@ export default function Header() {
                 <img className={cx('avatar')} src={fuhua} alt='Hello' />
                 <button className={cx('change-avatar')}><CameraAltOutlined /></button>
             </div>
-            <h3>Thanh Lâm</h3>
-            <span>thanhlam0241</span>
-            <span>Quyền hạn: </span>
+            <h3>Hello World</h3>
+            <span>helloworld123</span>
+            <span>Quyền hạn: Tổ trưởng</span>
             <hr />
-            <span>Nghề nghiệp : </span>
-            <span>Số điện thoại : </span>
+            <span>Nghề nghiệp : Tổ trưởng </span>
+            <span>Số điện thoại : 123456789</span>
         </div>
     )
 }
