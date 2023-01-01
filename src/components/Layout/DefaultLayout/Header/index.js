@@ -11,22 +11,40 @@ import { Wrapper as PopperWrapper } from '~/components/Popper';
 import HomeIcon from '@mui/icons-material/Home';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import { Avatar } from '@mui/material';
+import { faMagnifyingGlass, faUser, faRightFromBracket, faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { Avatar, Badge, Alert, Stack } from '@mui/material';
+import MailIcon from '@mui/icons-material/Mail';
+
 const cx = classNames.bind(styles);
 
 
 function Header({ text }) {
     const { auth, setAuth } = useContext(AuthContext);
+
+
     const tippy = useRef();
     const [tippyAvatar, setTippyAvatar] = useState(null);
     const turnOnTippy = (e) => {
         setTippyAvatar(true);
     }
+
+
+    const tippyMessage = useRef();
+    const [messageVisible, setMessageVisible] = useState(null);
+    const turnOnTippyMessage = (e) => {
+        setMessageVisible(true);
+    }
+
+
+    const [count, setCount] = useState(4);
+
     useEffect(() => {
         function handleClickOutside(event) {
             if (tippy.current && !tippy.current.contains(event.target)) {
                 setTippyAvatar(false);
+            }
+            if (tippyMessage.current && !tippyMessage.current.contains(event.target)) {
+                setMessageVisible(false);
             }
         }
         document.addEventListener("mousedown", handleClickOutside);
@@ -55,18 +73,52 @@ function Header({ text }) {
             <div className={cx('actions')} >
                 <Tippy
                     interactive
+                    visible={messageVisible}
+                    render={attrs => (
+                        <div ref={tippyMessage} className={cx('tippy')} tabIndex="-1" {...attrs}>
+                            {/* <Stack sx={{ width: '100%' }} spacing={2}>
+                                <Alert severity="error">This is an error alert — check it out!</Alert>
+                                <Alert severity="warning">This is a warning alert — check it out!</Alert>
+                                <Alert severity="info">This is an info alert — check it out!</Alert>
+                                <Alert severity="success">This is a success alert — check it out!</Alert>
+                            </Stack> */}
+                            <PopperWrapper>
+                                <Stack sx={{ width: '100%' }} spacing={2}>
+                                    <Alert sx={{ fontSize: 15 }} severity="error">This is an error alert — check it out!</Alert>
+                                    <Alert sx={{ fontSize: 15 }} severity="warning">This is a warning alert — check it out!</Alert>
+                                    <Alert sx={{ fontSize: 15 }} severity="info">This is an info alert — check it out!</Alert>
+                                    <Alert sx={{ fontSize: 15 }} severity="success">This is a success alert — check it out!</Alert>
+                                </Stack>
+                            </PopperWrapper>
+
+                        </div>
+                    )}
+                >
+                    <Badge color="secondary" badgeContent={count}  >
+                        <MailIcon sx={{ fontSize: 30, cursor: 'pointer' }} onClick={turnOnTippyMessage} />
+                    </Badge>
+                </Tippy>
+                <Tippy
+                    interactive
                     visible={tippyAvatar}
                     render={attrs => (
                         <div ref={tippy} className={cx('tippy')} tabIndex="-1" {...attrs}>
                             <PopperWrapper >
                                 <div className={cx('btn')}>
-                                    <NavLink to='/profile'>Thông tin tài khoản</NavLink>
+                                    <NavLink className={cx('btn-avatar-expand')} to='/profile'>
+                                        <span className={cx('icon-avatar-btn')}>
+                                            <FontAwesomeIcon icon={faUser} />
+                                        </span>
+                                        <span className={cx('avatar-text-btn')}>Thông tin tài khoản</span>
+                                    </NavLink>
                                 </div>
                                 <div className={cx('btn')}>
-                                    <NavLink to='/' onClick={() => { localStorage.removeItem('myUserNameReactApp'); }}>Đăng xuất</NavLink>
+                                    <NavLink className={cx('btn-avatar-expand')} to='/' onClick={() => { localStorage.removeItem('myUserNameReactApp'); }}>
+                                        <span className={cx('icon-avatar-btn')}><FontAwesomeIcon icon={faRightFromBracket} /> </span>
+                                        <span className={cx('avatar-text-btn')}>Đăng xuất</span>
+                                    </NavLink>
                                 </div>
                             </PopperWrapper>
-
                         </div>
                     )}
                 >

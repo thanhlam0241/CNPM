@@ -1,8 +1,10 @@
 :root {
     --bgc-account: #eff1f4;
+    --bgc-transparent: rgba(236, 227, 227, 0.5);
 }
 
 .profile-setting {
+    background-color: var(--bgc-transparent);
     width: 50%;
     height: 100%;
     display: flex;

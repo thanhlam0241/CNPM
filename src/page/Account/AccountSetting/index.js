@@ -51,7 +51,7 @@ export default function AccountSetting() {
                 </Alert>
             </Snackbar>
             <div className={cx('account-info')}>
-                <Button onClick={changeState} sx={{ position: 'absolute', top: -30, right: -20 }}>Thay đổi thông tin <ChangeCircleOutlined /></Button>
+                <Button onClick={changeState} sx={{ position: 'absolute', top: -30, right: -20, color: '#000' }}>Thay đổi thông tin <ChangeCircleOutlined /></Button>
                 <FormControl sx={{ width: '30%' }} variant="standard">
                     <InputLabel sx={{ fontSize: 20 }} htmlFor="component-simple1">First name</InputLabel>
                     <Input sx={{ fontSize: 15 }}

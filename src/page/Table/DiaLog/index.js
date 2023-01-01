@@ -1,5 +1,6 @@
 import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
+import Household from '../Paper/household';
 // import PropTypes from 'prop-types';
 export default function SimpleDialog({ open, onClose }) {
 
@@ -10,7 +11,7 @@ export default function SimpleDialog({ open, onClose }) {
     return (
         <Dialog onClose={handleClose} open={open}>
             <DialogTitle>Thông tin hộ khẩu</DialogTitle>
-            <p>Hello world</p>
+            <Household />
         </Dialog>
     );
 }

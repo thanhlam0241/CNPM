@@ -109,7 +109,7 @@ export default function User() {
                 <TextField
                     value={currentPassword}
                     onChange={handleChangeInputCur}
-                    sx={{ fontSize: 20 }}
+                    sx={{ fontSize: 20, width: 200 }}
                     label="Mật khẩu hiện tại"
                     inputProps={{ style: { fontSize: 15 } }}
                     InputLabelProps={{ style: { fontSize: 20 } }}
@@ -118,7 +118,7 @@ export default function User() {
                     variant="standard"
                 />
                 <TextField
-                    sx={{ fontSize: 20 }}
+                    sx={{ fontSize: 20, width: 200 }}
                     label="Mật khẩu mới"
                     inputProps={{ style: { fontSize: 15 } }}
                     InputLabelProps={{ style: { fontSize: 20 } }}
@@ -129,7 +129,7 @@ export default function User() {
                     onChange={handleChangeInputNew}
                 />
                 <TextField
-                    sx={{ fontSize: 20 }}
+                    sx={{ fontSize: 20, width: 200 }}
                     label="Xác nhận "
                     inputProps={{ style: { fontSize: 15 } }}
                     InputLabelProps={{ style: { fontSize: 20 } }}
