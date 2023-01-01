@@ -70,7 +70,7 @@ function Header({ text }) {
                         </div>
                     )}
                 >
-                    <Avatar src={fuhua} onClick={turnOnTippy} />
+                    <Avatar sx={{ cursor: 'pointer' }} src={fuhua} onClick={turnOnTippy} />
                 </Tippy>
             </div>
         </ header>

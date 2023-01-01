@@ -1,11 +1,8 @@
 import { useState, useEffect } from 'react';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
-import { Collapse, Button, TextField } from '@mui/material';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
+import { Collapse, Button, TextField, Alert, Snackbar, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
+
+import SimpleDialog from '../DiaLog';
 // import styles from './Table1.module.scss';
 // import classNames from 'classnames/bind';
 
@@ -33,28 +30,57 @@ const rowInit = [
 ]
 
 export default function TableHoKhau() {
+    //các dữ liệu từng dòng được khởi tạo trong bảng, sẽ gọi bằng api
     const [rows, setRows] = useState(rowInit);
+
+    //trạng thái thanh chỉnh sửa thông tin từng hộ khẩu
     const [visible, setVisible] = useState(false);
+
+    //các trường dữ liệu trong bảng
     const [columnsTable, setColumsTable] = useState(columns);
+
+    //trường dữ liệu từng cột
     const [idField, setIdField] = useState();
     const [deskField, setDeskField] = useState();
+    //còn tiếp
+
+    //confirm box xóa 1 hộ khẩu, xuất hiện khi nhấn nút xóa
     const [openAlert, setOpenAlert] = useState(false);
+
+    //id của hộ khẩu cần xóa
     const [deleteId, setDeleteId] = useState();
+
+    //1 dialog hiển thị chi tiết hộ khẩu khi nhấn vào nút 'chi tiết'
+    const [dialogInfo, setDialogInfo] = useState();
+
+    //trạng thái thành công khi xóa 1 hộ khẩu
+    const [success, setSuccess] = useState(false);
+    const handleCloseSnackbar = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setSuccess(false);
+    };
+    //bắt đầu sửa hộ khẩu
     const handleClickOpen = () => {
         setOpenAlert(true);
     };
-
+    //không xóa nữa
     const handleClose = () => {
         setDeleteId(null);
         setOpenAlert(false);
     };
+    //đồng ý xóa
     const handleAgree = () => {
         setRows(prev => {
             return prev.filter(row => row.id !== deleteId)
         });
+        setSuccess(true);
         setDeleteId(null);
         setOpenAlert(false);
     };
+    //thêm trạng thái các nút cho từng dòng: sưa, xóa, chi tiết
     useEffect(() => {
         const actionFirst = setTimeout(() => {
             setColumsTable([
@@ -102,6 +128,31 @@ export default function TableHoKhau() {
                             </Button>
                         </ div >)
                     }
+                },
+                {
+                    field: 'Detail',
+                    headerName: '  ',
+                    width: 220,
+                    renderCell: (params) => {
+                        const onClick = (e) => {
+                            e.stopPropagation();
+
+                            // const api = params.api;
+                            // const thisRow = {};
+
+                            // api.getAllColumns()
+                            //     .filter((c) => c.field !== '__check__' && !!c)
+                            //     .forEach(
+                            //         (c) => (thisRow[c.field] = params.getValue(params.id, c.field)),
+                            //     );
+                            setDialogInfo(true);
+                        };
+                        return (< div style={{ display: 'flex', alignItems: 'stretch', flexDirection: 'row', padding: '2px 0', margin: '0px 2px' }}>
+                            <Button variant="contained" color="primary" onClick={onClick}>
+                                Chi tiết
+                            </Button>
+                        </ div >)
+                    }
                 }
             ])
         }, 100)
@@ -112,6 +163,15 @@ export default function TableHoKhau() {
     }, [])
     return (
         <div style={{ height: '90%', width: '100%', margin: '10' }}>
+            <Snackbar open={success} autoHideDuration={6000} onClose={handleCloseSnackbar}>
+                <Alert onClose={handleCloseSnackbar} severity="success" sx={{ width: '100%', fontSize: 15 }}>
+                    Xoá hộ khẩu thành công!
+                </Alert>
+            </Snackbar>
+            <SimpleDialog
+                open={dialogInfo}
+                onClose={setDialogInfo}
+            />
             <div>
                 <Button sx={{ margin: '0 5px 1px 0' }} variant="contained" color="primary" onClick={() => setVisible(!visible)}>
                     Edit

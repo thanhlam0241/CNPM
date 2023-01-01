@@ -13,7 +13,7 @@
     {
       "id": 1,
       "username": "admin",
-      "password": "123456"
+      "password": "123"
     },
     {
       "id": 2,
@@ -37,7 +37,7 @@
     },
     {
       "username": "thanhlam0241",
-      "password": "hoatuyet2412002",
+      "password": "123456789",
       "id": 6
     },
     {
@@ -59,6 +59,11 @@
       "username": "manhlinh123",
       "password": "manhlinh123",
       "id": 10
+    },
+    {
+      "username": "",
+      "password": "",
+      "id": 11
     }
   ],
   "HK": [],

@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { Fab, MenuItem, Box, TextField, Button } from '@mui/material';
+import { Fab, MenuItem, Box, TextField, Button, Backdrop, CircularProgress } from '@mui/material';
 
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -13,6 +13,14 @@ const genders = [
     { value: 'female', label: 'Nữ' }
 ]
 export default function FormNKComponent() {
+
+    const [open, setOpen] = useState(false);
+    const handleClose = () => {
+        setOpen(false);
+    };
+    const handleToggle = () => {
+        setOpen(!open);
+    };
 
     const [value, setValue] = useState(null);
     const [img, setImg] = useState();
@@ -41,6 +49,13 @@ export default function FormNKComponent() {
             noValidate
             autoComplete="off"
         >
+            <Backdrop
+                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                open={open}
+                onClick={handleClose}
+            >
+                <CircularProgress color="inherit" />
+            </Backdrop>
             <TextField required label="Họ và tên" variant="outlined" />
             <TextField required label="Bí danh" variant="outlined" />
             <TextField required label="Họ và tên chủ hộ" variant="outlined" />
@@ -115,7 +130,7 @@ export default function FormNKComponent() {
                 }
 
             </div>
-            <Button style={{ margin: '0 auto', display: 'block' }} variant="contained">Gửi</Button>
+            <Button onClick={handleToggle} style={{ margin: '0 auto', display: 'block' }} variant="contained">Gửi</Button>
         </Box>
     );
 }

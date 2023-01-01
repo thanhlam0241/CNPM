@@ -1,4 +1,4 @@
-import { Fab, Box, TextField, MenuItem, Collapse, Button } from '@mui/material';
+import { Fab, Box, TextField, MenuItem, Collapse, Button, Backdrop, CircularProgress } from '@mui/material';
 import { useState, useCallback, useRef, useEffect } from 'react';
 import { Add, CloseOutlined, DoneSharp } from '@mui/icons-material';
 import styles from './HK.module.scss'
@@ -7,6 +7,9 @@ import { DataGrid } from '@mui/x-data-grid';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+
+
+
 const cx = classNames.bind(styles);
 const genders = [
     { value: 'male', label: 'Nam' },
@@ -40,7 +43,15 @@ export default function FormHKComponent() {
     const [visible, setVisible] = useState(false);
     const [visibleDes, setVisibleDes] = useState(false);
     // const [NK, setNK] = useState([]);
+    const [open, setOpen] = useState(false);
+    const handleClose = () => {
+        setOpen(false);
+    };
+    const handleToggle = () => {
+        setOpen(!open);
+    };
 
+    const [openImg, setOpenImg] = useState(false);
     // const [name, setName] = useState('');
     // const [alias, setAlias] = useState('');
     const [birthday, setBirthday] = useState(null);
@@ -121,6 +132,7 @@ export default function FormHKComponent() {
     }, []);
 
     const [arrImg, setArrImg] = useState([]);
+
     const handleFileImage = useCallback((e) => {
         let files = [...e.target.files].map((file) => {
             file.preview = URL.createObjectURL(file);
@@ -128,15 +140,23 @@ export default function FormHKComponent() {
         })
         setArrImg([...arrImg, ...files]);
         e.target.value = null;
-    }, [arrImg]);
-    useEffect(() => {
+
         return () => {
             arrImg && arrImg.forEach((file) => URL.revokeObjectURL(file.preview))
             //remvove the temporary url if avatar exists
         }
-    }, [arrImg])
+
+    }, [arrImg]);
     return (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <Backdrop
+                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                open={open}
+                onClick={handleClose}
+            >
+                <CircularProgress color="inherit" />
+            </Backdrop>
+
             <Box
                 component="form"
                 sx={{
@@ -172,6 +192,9 @@ export default function FormHKComponent() {
                         >
                             <Add /> Ảnh minh chứng
                         </Fab>
+                        {openImg && <CircularProgress size={10} sx={{
+                            marginLeft: '10px',
+                        }} color="inherit" />}
                     </label>
                     {(arrImg.length > 0) && <div className={cx('img-render')}>{arrImg.map((item, index) => (
                         <div key={"image" + index} style={{ position: 'relative', display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center', width: 'auto' }}>
@@ -289,7 +312,7 @@ export default function FormHKComponent() {
                     </div>
                 </div>
             </Box>
-            <Button color="primary" variant="contained">Gửi</Button>
+            <Button onClick={handleToggle} color="primary" variant="contained">Gửi</Button>
         </div>
     );
 }

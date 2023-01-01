@@ -7,7 +7,7 @@ import classNames from 'classnames/bind';
 import SmoothCollapse from 'react-smooth-collapse';
 import { TitleContext } from '../../';
 const cx = classNames.bind(styles);
-
+// onClick = { handleToggle }
 
 function CollapseButton({ buttonObject, isOpen }) {
     const changer = useContext(TitleContext);
@@ -15,7 +15,7 @@ function CollapseButton({ buttonObject, isOpen }) {
     const toggle = useCallback(() => setVisible(prev => !prev), []);
     return (
         <>
-            <NavLink to={buttonObject.link} className={cx('btn-side')} onClick={toggle}>
+            <NavLink className={cx('btn-side')} onClick={toggle}>
                 <span>{buttonObject.icon}</span>
                 <span className={isOpen ? cx('normal-btn') : cx('hide-btn')} >{isOpen && (buttonObject.title)}</span>
                 <span>{isOpen && (!visible ? <KeyboardArrowDown /> : <KeyboardArrowUp />)}</span>

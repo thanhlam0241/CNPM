@@ -2,7 +2,7 @@
 import { useCallback, useState, useEffect, useRef, useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
 //material-ui
-import { Button, FormControl } from '@mui/material'
+import { Button, FormControl, CircularProgress } from '@mui/material'
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import InputLabel from '@mui/material/InputLabel';
@@ -34,6 +34,9 @@ export default function Login({ act }) {
     const [errMsg, setErrMsg] = useState('');
     const [start, setStart] = useState(false);
     const navigate = useNavigate();
+    //handle loading
+    const [loading, setLoading] = useState(false);
+
     useEffect(() => {
         userRef.current.focus();
     }, [])
@@ -44,20 +47,21 @@ export default function Login({ act }) {
     //handle login
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
+        setStart(false);
         try {
             const response = await axios.get(`${LOGIN_URL}`).then(res => res.data);
             const user = response.find((user) => user.username === username && user.password === password);
             if (!user) {
+                setStart(true);
                 setErrMsg('Invalid username or password');
             }
             else {
                 setAuth(user);
-                setErrMsg('Login successfully')
                 setTimeout(() => navigate('/profile'), 100)
                 setUserName('');
                 setPassword('');
             }
-            setStart(true);
         }
         catch (err) {
             if (!err?.response) {
@@ -73,6 +77,12 @@ export default function Login({ act }) {
                 setErrMsg('Something went wrong');
             }
             errRef.current.focus();
+        }
+        setLoading(false);
+    }
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            handleSubmit(e);
         }
     }
 
@@ -103,8 +113,8 @@ export default function Login({ act }) {
                             }
                             value={username || ''}
                             onChange={e => setUserName(e.target.value)}
+                            onKeyDown={handleKeyDown}
                             required
-
                         />
                     </FormControl>
                     <FormControl sx={{ margin: '10px 0' }} variant="standard">
@@ -122,6 +132,7 @@ export default function Login({ act }) {
                             }
                             value={password || ''}
                             onChange={e => setPassword(e.target.value)}
+                            onKeyDown={handleKeyDown}
                             endAdornment={
                                 <InputAdornment position="end">
                                     <IconButton
@@ -141,6 +152,14 @@ export default function Login({ act }) {
                 <Button variant="contained" color="primary" onClick={handleSubmit} >
                     Login
                 </Button>
+                {loading &&
+                    <CircularProgress
+                        sx={{
+                            marginTop: 1,
+                            animationDuration: '550ms',
+                        }}
+                        size={20}
+                        thickness={4} />}
                 {start && <p style={{ marginTop: 10, color: 'red' }}>{errMsg}</p>}
                 <hr className={cx('hr-login')} />
                 <p>Don't you have an account? <span onClick={() => act('2')} className={cx('signup-btn')}>Sign up</span></p>

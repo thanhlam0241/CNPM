@@ -1,12 +1,10 @@
 import { useNavigate } from 'react-router-dom';
 import { useState, useContext } from 'react'
 //material-ui
-import { Button, FormControl } from '@mui/material'
-import InputLabel from '@mui/material/InputLabel';
-import InputAdornment from '@mui/material/InputAdornment';
+import { Button, FormControl, CircularProgress, InputLabel, InputAdornment, Input } from '@mui/material'
+//icons
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
-import Input from '@mui/material/Input';
 //api
 import axios, { axiosConfig } from '../../../services/api/axios'
 //context 
@@ -14,6 +12,7 @@ import { AuthContext } from '~/components/AuthenProvider'
 //style
 import styles from './Register.module.scss'
 import classNames from 'classnames/bind'
+import { SecurityUpdate } from '@mui/icons-material';
 const cx = classNames.bind(styles)
 
 const REGISTER_URL = '/accounts';
@@ -21,6 +20,9 @@ const REGISTER_URL = '/accounts';
 export default function Signup({ act }) {
     //use to navigate
     const navigate = useNavigate();
+
+    //loading update
+    const [loading, setLoading] = useState(false);
 
     //auth context
     const { setAuth } = useContext(AuthContext);
@@ -37,6 +39,8 @@ export default function Signup({ act }) {
     //handle register
     const handleRegister = async (e) => {
         e.preventDefault();
+        setLoading(true);
+        setStatus(false);
         try {
             const response = await axios.get(`${REGISTER_URL}`).then(res => res.data);
             const user = response.find((user) => user.username === username);
@@ -66,6 +70,7 @@ export default function Signup({ act }) {
             }
         }
         setStatus(true);
+        setLoading(false);
     }
 
     //render
@@ -131,6 +136,12 @@ export default function Signup({ act }) {
                 <Button variant="contained" color="primary" onClick={handleRegister} >
                     Register
                 </Button>
+                {loading && <CircularProgress sx={{
+                    marginTop: 1,
+                    animationDuration: '550ms',
+                }}
+                    size={20}
+                    thickness={4} />}
                 {status && <p style={{ marginTop: 10, color: 'red' }}>{msg}</p>}
                 <hr className={cx('hr-login')} />
                 <p>Do you have an account? <span onClick={() => act('1')} className={cx('signin-btn')}>Sign up</span></p>
