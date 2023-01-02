@@ -4,6 +4,7 @@ import classNames from 'classnames/bind';
 import { CircularProgress, TextField, Backdrop, Snackbar, Alert } from '@mui/material';
 
 import axios from '~/services/api/axios';
+import accountApi from '~/services/api/accountApi';
 import { AuthContext } from '~/components/AuthenProvider'
 import { useState, useContext } from 'react';
 
@@ -61,10 +62,15 @@ export default function User() {
 
         if (currentPassword === auth.password && newPassword === confirmPassword) {
             setAuth({ ...auth, password: newPassword });
-            await axios.put(ACCOUNT_API + '/' + auth.id, {
-                ...auth,
-                password: newPassword
-            });
+            // await axios.put(ACCOUNT_API + '/' + auth.id, {
+            //     ...auth,
+            //     password: newPassword
+            // });
+            await accountApi.changePassword(
+                auth.id,
+                newPassword,
+                auth
+            )
             setSuccess(true);
             setErrorCur(false);
             setErrorNew(false);
