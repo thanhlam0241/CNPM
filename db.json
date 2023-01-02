@@ -1,78 +1,44 @@
 {
-  "list": [
-    {
-      "id": 1,
-      "item": "bread"
-    },
-    {
-      "id": 2,
-      "item": "grapes"
-    }
-  ],
-  "accounts": [
-    {
-      "id": 1,
-      "username": "admin",
-      "password": "123"
-    },
-    {
-      "id": 2,
-      "username": "user",
-      "password": "123456"
-    },
-    {
-      "id": 3,
-      "username": "id534535",
-      "password": "123456"
-    },
-    {
-      "username": "thanhlam0214",
-      "password": "hello123",
-      "id": 4
-    },
-    {
-      "username": "thanhlam02141",
-      "password": "thanhlam0214",
-      "id": 5
-    },
-    {
-      "username": "thanhlam0241",
-      "password": "123456789",
-      "id": 6
-    },
-    {
-      "username": "hello123",
-      "password": "hello123",
-      "id": 7
-    },
-    {
-      "username": "messi123",
-      "password": "123456",
-      "id": 8
-    },
-    {
-      "username": "helloworld",
-      "password": "helloworld",
-      "id": 9
-    },
-    {
-      "username": "manhlinh123",
-      "password": "manhlinh123",
-      "id": 10
-    },
-    {
-      "username": "",
-      "password": "",
-      "id": 11
-    },
-    {
-      "params": {
-        "username": "helloworld123",
-        "password": "helloworld"
-      },
-      "id": 12
-    }
-  ],
-  "HK": [],
-  "NK": []
+    "accounts": [
+        {
+            "id": 1,
+            "username": "admin123",
+            "password": "12345678"
+        },
+        {
+            "username": "thanhlam0214",
+            "password": "hello123",
+            "id": 2
+        },
+        {
+            "username": "thanhlam02141",
+            "password": "thanhlam0214",
+            "id": 3
+        },
+        {
+            "username": "thanhlam0241",
+            "password": "123456789",
+            "id": 4
+        },
+        {
+            "username": "hello123",
+            "password": "hello123",
+            "id": 5
+        },
+        {
+            "username": "messi123",
+            "password": "123456",
+            "id": 6
+        },
+        {
+            "username": "helloworld",
+            "password": "helloworld",
+            "id": 7
+        },
+        {
+            "username": "manhlinh123",
+            "password": "manhlinh123",
+            "id": 8
+        }
+    ]
 }
