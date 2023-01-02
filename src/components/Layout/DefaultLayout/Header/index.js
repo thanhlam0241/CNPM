@@ -1,5 +1,5 @@
-import { useState, useRef, useContext, useCallback, useEffect } from 'react';
-import { AuthContext } from '~/components/AuthenProvider';
+import { useState, useRef, useContext, useEffect } from 'react';
+// import { AuthContext } from '~/components/AuthenProvider';
 
 import styles from './Header.module.scss';
 import classNames from 'classnames/bind';
@@ -11,7 +11,7 @@ import { Wrapper as PopperWrapper } from '~/components/Popper';
 import HomeIcon from '@mui/icons-material/Home';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass, faUser, faRightFromBracket, faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass, faUser, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import { Avatar, Badge, Alert, Stack } from '@mui/material';
 import MailIcon from '@mui/icons-material/Mail';
 
@@ -19,7 +19,7 @@ const cx = classNames.bind(styles);
 
 
 function Header({ text }) {
-    const { auth, setAuth } = useContext(AuthContext);
+    // const { auth, setAuth } = useContext(AuthContext);
 
 
     const tippy = useRef();
