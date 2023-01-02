@@ -168,10 +168,10 @@ export default function FormHKComponent() {
                 autoComplete="off"
             >
                 <div className={cx('input-text-area')}>
-                    <TextField required id="outlined-basic1" label="Số hộ khẩu" variant="outlined" />
-                    <TextField required id="outlined-basic2" label="Nơi thường trú" variant="outlined" />
-                    <TextField required id="outlined-basic3" label="Tổ phụ trách" variant="outlined" />
-                    <TextField required id="outlined-basic4" label="Họ và tên chủ hộ" variant="outlined" />
+                    <TextField helperText='' required id="outlined-basic1" label="Số hộ khẩu" variant="outlined" />
+                    <TextField helperText='' required id="outlined-basic2" label="Nơi thường trú" variant="outlined" />
+                    <TextField helperText='' required id="outlined-basic3" label="Tổ phụ trách" variant="outlined" />
+                    <TextField helperText='' required id="outlined-basic4" label="Họ và tên chủ hộ" variant="outlined" />
                 </div>
                 <div className={cx('input-image-area')}>
                     <label htmlFor="upload-photo" style={{ marginLeft: 10 }}>
@@ -231,8 +231,8 @@ export default function FormHKComponent() {
                     </Fab>
                     <Collapse sx={{ margin: '5px 0' }} in={visible} timeout="auto" >
                         <div style={{ display: 'flex', flexFlow: 'row wrap' }}>
-                            <TextField required inputRef={nameRef} label="Họ và tên" variant="outlined" />
-                            <TextField required inputRef={aliasRef} label="Bí danh" variant="outlined" />
+                            <TextField helperText='' required inputRef={nameRef} label="Họ và tên" variant="outlined" />
+                            <TextField helperText='' required inputRef={aliasRef} label="Bí danh" variant="outlined" />
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <DatePicker
                                     required
@@ -246,15 +246,15 @@ export default function FormHKComponent() {
                                     renderInput={(params) => <TextField {...params} />}
                                 />
                             </LocalizationProvider>
-                            <TextField required inputRef={birthPlaceRef} label="Nơi sinh" variant="outlined" />
-                            <TextField required inputRef={domicileRef} label="Nguyên quán" variant="outlined" />
-                            <TextField required inputRef={dantocRef} label="Dân tộc" variant="outlined" />
-                            <TextField required inputRef={citizenshipRef} label="Quốc tịch" variant="outlined" />
-                            <TextField required inputRef={careerRef} label="Nghề nghiệp" variant="outlined" />
-                            <TextField required inputRef={workplaceRef} label="Nơi làm việc" variant="outlined" />
-                            <TextField required inputRef={identificationRef} label="CMND/CCCD" variant="outlined" />
-                            <TextField required inputRef={relationshipRef} label="Quan hệ với chủ hộ" variant="outlined" />
-                            <TextField required
+                            <TextField helperText='' required inputRef={birthPlaceRef} label="Nơi sinh" variant="outlined" />
+                            <TextField helperText='' required inputRef={domicileRef} label="Nguyên quán" variant="outlined" />
+                            <TextField helperText='' required inputRef={dantocRef} label="Dân tộc" variant="outlined" />
+                            <TextField helperText='' required inputRef={citizenshipRef} label="Quốc tịch" variant="outlined" />
+                            <TextField helperText='' required inputRef={careerRef} label="Nghề nghiệp" variant="outlined" />
+                            <TextField helperText='' required inputRef={workplaceRef} label="Nơi làm việc" variant="outlined" />
+                            <TextField helperText='' required inputRef={identificationRef} label="CMND/CCCD" variant="outlined" />
+                            <TextField helperText='' required inputRef={relationshipRef} label="Quan hệ với chủ hộ" variant="outlined" />
+                            <TextField helperText='' required
                                 id="standard-select-gender"
                                 select
                                 label="Giới tính"

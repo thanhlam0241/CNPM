@@ -1,5 +1,5 @@
 import { useState, useRef, useContext, useEffect } from 'react';
-// import { AuthContext } from '~/components/AuthenProvider';
+import { AuthContext } from '~/components/AuthenProvider';
 
 import styles from './Header.module.scss';
 import classNames from 'classnames/bind';
@@ -7,6 +7,8 @@ import { NavLink } from "react-router-dom";
 import fuhua from '~/assets/avatars/fuhua.png';
 import Tippy from '@tippyjs/react/headless';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
+//services
+import accountService from '~/services/account';
 //icons
 import HomeIcon from '@mui/icons-material/Home';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
@@ -19,8 +21,7 @@ const cx = classNames.bind(styles);
 
 
 function Header({ text }) {
-    // const { auth, setAuth } = useContext(AuthContext);
-
+    const { setAuth } = useContext(AuthContext);
 
     const tippy = useRef();
     const [tippyAvatar, setTippyAvatar] = useState(null);
@@ -28,13 +29,15 @@ function Header({ text }) {
         setTippyAvatar(true);
     }
 
-
     const tippyMessage = useRef();
     const [messageVisible, setMessageVisible] = useState(null);
     const turnOnTippyMessage = (e) => {
         setMessageVisible(true);
     }
 
+    const handleLogout = () => {
+        accountService.logout(setAuth);
+    }
 
     const [count, setCount] = useState(4);
 
@@ -113,7 +116,7 @@ function Header({ text }) {
                                     </NavLink>
                                 </div>
                                 <div className={cx('btn')}>
-                                    <NavLink className={cx('btn-avatar-expand')} to='/' onClick={() => { localStorage.removeItem('myUserNameReactApp'); }}>
+                                    <NavLink className={cx('btn-avatar-expand')} to='/' onClick={handleLogout}>
                                         <span className={cx('icon-avatar-btn')}><FontAwesomeIcon icon={faRightFromBracket} /> </span>
                                         <span className={cx('avatar-text-btn')}>Đăng xuất</span>
                                     </NavLink>

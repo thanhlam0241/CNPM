@@ -1,21 +1,21 @@
 import { useNavigate } from 'react-router-dom';
 import { useState, useContext } from 'react'
 //material-ui
-import { Button, FormControl, CircularProgress, InputLabel, InputAdornment, Input } from '@mui/material'
+import { Button, FormControl, CircularProgress, InputLabel, InputAdornment, Input, FormHelperText } from '@mui/material'
 //icons
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
 //api
-import axios, { axiosConfig } from '../../../services/api/axios'
+import accountApi from '../../../services/api/accountApi'
+import validation from '~/services/validate';
 //context 
 import { AuthContext } from '~/components/AuthenProvider'
 //style
 import styles from './Register.module.scss'
 import classNames from 'classnames/bind'
-import { SecurityUpdate } from '@mui/icons-material';
+
 const cx = classNames.bind(styles)
 
-const REGISTER_URL = '/accounts';
 
 export default function Signup({ act }) {
     //use to navigate
@@ -32,34 +32,56 @@ export default function Signup({ act }) {
     const [password, setPassword] = useState('');
     const [confPassword, setConfPassword] = useState('');
 
+    //use to validate input
+    const [userError, setUserError] = useState();
+    const [passError, setPassError] = useState();
+    const [confPassError, setConfPassError] = useState();
+
     //status of register
     const [status, setStatus] = useState(false);
     const [msg, setMsg] = useState('');
 
     //handle register
     const handleRegister = async (e) => {
-        e.preventDefault();
         setLoading(true);
         setStatus(false);
         try {
-            const response = await axios.get(`${REGISTER_URL}`).then(res => res.data);
-            const user = response.find((user) => user.username === username);
-            if (user) {
-                setMsg('Username already exists');
+            const userValidation = validation.checkUsername(username);
+            const passValidation = validation.checkPassword(password);
+            console.log(userValidation, passValidation)
+            if (!userValidation.isValid) {
+                setUserError(userValidation.message);
+                setStatus(true);
+            }
+            else if (!passValidation.isValid) {
+                setUserError('');
+                setPassError(passValidation.message);
+                setStatus(true);
             }
             else if (password !== confPassword) {
-                setMsg('Password and confirm password must be the same');
+                setPassError('');
+                setConfPassError('Password and confirm password must be the same');
+                setStatus(true);
             }
             else {
-                const data = {
-                    username: username,
-                    password: password
+                setConfPassError('');
+                const account = await accountApi.checkLogin({ username: username });
+                console.log(account)
+                if (account.length > 0) {
+                    setMsg('Username already exists');
+                    setStatus(true);
                 }
-                setAuth(data);
-                await axios.post(`${REGISTER_URL}`, data, axiosConfig);
-                setTimeout(() => navigate('/profile'), 100)
-                setMsg('Register successfully');
+                else {
+                    const data = {
+                        username: username,
+                        password: password
+                    }
+                    setAuth(data);
+                    await accountApi.addAccount(data);
+                    setTimeout(() => navigate('/profile'), 100);
+                }
             }
+
         }
         catch (err) {
             if (!err?.response) {
@@ -69,7 +91,6 @@ export default function Signup({ act }) {
                 setMsg(err.response.data.message);
             }
         }
-        setStatus(true);
         setLoading(false);
     }
 
@@ -90,10 +111,11 @@ export default function Signup({ act }) {
                                     <AccountCircle />
                                 </InputAdornment>
                             }
-                            value={username || ''}
+                            value={username}
                             onChange={(e) => setUserName(e.target.value)}
                             autoComplete="off"
                         />
+                        {status && <FormHelperText sx={{ fontSize: 10, color: 'red' }}>{userError}</FormHelperText>}
                     </FormControl>
                     <FormControl sx={{ margin: '10px 0' }} variant="standard">
                         <InputLabel sx={{ fontSize: 15 }} htmlFor="input_regis_password">
@@ -108,10 +130,11 @@ export default function Signup({ act }) {
                                 </InputAdornment>
                             }
                             type="password"
-                            value={password || ''}
+                            value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             autoComplete="off"
                         />
+                        {status && <FormHelperText sx={{ fontSize: 10, color: 'red' }}>{passError}</FormHelperText>}
                     </FormControl>
                     <FormControl sx={{ margin: '10px 0' }} variant="standard">
                         <InputLabel sx={{ fontSize: 15 }} htmlFor="input_regis_conf_password">
@@ -126,10 +149,11 @@ export default function Signup({ act }) {
                                 </InputAdornment>
                             }
                             type="password"
-                            value={confPassword || ''}
+                            value={confPassword}
                             onChange={(e) => setConfPassword(e.target.value)}
                             autoComplete="off"
                         />
+                        {status && <FormHelperText sx={{ fontSize: 10, color: 'red' }}>{confPassError}</FormHelperText>}
                     </FormControl>
                 </div>
 

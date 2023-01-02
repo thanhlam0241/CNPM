@@ -5,10 +5,9 @@ import { useContext } from 'react';
 function Start() {
     const { auth } = useContext(AuthContext);
     const navigate = useNavigate();
-    const [state, setstate] = useState(5)
+    const [state, setstate] = useState(3)
     useEffect(() => {
         const a = setTimeout(() => {
-            console.log(1)
             setstate(prev => prev - 1);
         }, 1000)
         if (state === 0) {
