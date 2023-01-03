@@ -111,6 +111,16 @@ export default function Login({ act }) {
         }
     }
 
+    const handleValueInput = (e) => {
+        if (e.target.id === 'input_login_account') {
+            setUserName(e.target.value);
+        }
+        else if (e.target.id === 'input_login_password') {
+            setPassword(e.target.value);
+        }
+
+    }
+
     //handle password visibility
     const [showPassword, setShowPassword] = useState(false);
     const handleClickShowPassword = useCallback(() => setShowPassword((show) => !show), []);
@@ -137,7 +147,7 @@ export default function Login({ act }) {
                                 </InputAdornment>
                             }
                             value={username || ''}
-                            onChange={e => setUserName(e.target.value)}
+                            onChange={handleValueInput}
                             onKeyDown={handleKeyDown}
                             required
                         />
@@ -158,7 +168,7 @@ export default function Login({ act }) {
                                 </InputAdornment>
                             }
                             value={password || ''}
-                            onChange={e => setPassword(e.target.value)}
+                            onChange={handleValueInput}
                             onKeyDown={handleKeyDown}
                             endAdornment={
                                 <InputAdornment position="end">

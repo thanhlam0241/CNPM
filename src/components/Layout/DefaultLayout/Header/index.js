@@ -87,10 +87,10 @@ function Header({ text }) {
                             </Stack> */}
                             <PopperWrapper>
                                 <Stack sx={{ width: '100%' }} spacing={2}>
-                                    <Alert sx={{ fontSize: 15 }} severity="error">This is an error alert — check it out!</Alert>
-                                    <Alert sx={{ fontSize: 15 }} severity="warning">This is a warning alert — check it out!</Alert>
-                                    <Alert sx={{ fontSize: 15 }} severity="info">This is an info alert — check it out!</Alert>
-                                    <Alert sx={{ fontSize: 15 }} severity="success">This is a success alert — check it out!</Alert>
+                                    <Alert sx={{ fontSize: 15 }} severity="warning">Tài khoản của bạn đã bị khóa!</Alert>
+                                    <Alert sx={{ fontSize: 15 }} severity="error">Tài khoản của bạn đã bị đăng nhập ở nơi khác!</Alert>
+                                    <Alert sx={{ fontSize: 15 }} severity="success">Đơn xin đăng ký nhân khẩu của bạn đã được duyệt!</Alert>
+                                    <Alert sx={{ fontSize: 15 }} severity="info">Bạn đã gửi đơn xin đăng ký nhân khẩu thành công!</Alert>
                                 </Stack>
                             </PopperWrapper>
 

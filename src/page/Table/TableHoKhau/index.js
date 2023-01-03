@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import { Collapse, Button, TextField, Alert, Snackbar, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
-
-import SimpleDialog from '../DiaLog';
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
+import FullScreenDialog from '../DiaLog/fullScreen';
 // import styles from './Table1.module.scss';
 // import classNames from 'classnames/bind';
 
@@ -10,12 +10,12 @@ import SimpleDialog from '../DiaLog';
 
 //column field
 const columns = [
-    { field: 'id', headerName: 'ID', width: 40 },
-    { field: 'soHoKhau', headerName: 'Số hộ khẩu', width: 110 },
-    { field: 'noiThuongTru', headerName: 'Nơi thường trú', width: 140 },
-    { field: 'thanhVien', headerName: 'Danh sách các thành viên', width: 300 },
-    { field: 'chuHo', headerName: 'Chủ hộ', width: 150 },
-    { field: 'toPhuTrach', headerName: 'Tổ phụ trách', type: 'number', width: 150 },
+    { field: 'id', headerName: 'ID', width: 40, align: 'center', headerAlign: 'center' },
+    { field: 'soHoKhau', headerName: 'Số hộ khẩu', align: 'center', headerAlign: 'center', width: 110 },
+    { field: 'noiThuongTru', headerName: 'Nơi thường trú', align: 'center', headerAlign: 'center', width: 140 },
+    { field: 'thanhVien', headerName: 'Danh sách các thành viên', align: 'center', headerAlign: 'center', width: 300 },
+    { field: 'chuHo', headerName: 'Chủ hộ', align: 'center', headerAlign: 'center', width: 150 },
+    { field: 'toPhuTrach', headerName: 'Tổ phụ trách', type: 'number', width: 150, align: 'center', headerAlign: 'center' },
 ]
 //data in each row
 const rowInit = [
@@ -84,10 +84,38 @@ export default function TableHoKhau() {
     useEffect(() => {
         const actionFirst = setTimeout(() => {
             setColumsTable([
-                ...columns,
+                ...columns.filter((c) => c.field !== 'thanhVien'),
+                {
+                    field: 'thanhVien',
+                    headerName: 'Danh sách các thành viên',
+                    width: 220,
+                    headerAlign: 'center',
+                    align: 'center',
+                    renderCell: (params) => {
+                        const onClick = (e) => {
+                            e.stopPropagation();
+                            // const api = params.api;
+                            // const thisRow = {};
+
+                            // api.getAllColumns()
+                            //     .filter((c) => c.field !== '__check__' && !!c)
+                            //     .forEach(
+                            //         (c) => (thisRow[c.field] = params.getValue(params.id, c.field)),
+                            //     );
+                            setDialogInfo(true);
+                        };
+                        return (
+
+                            <Button variant="contained" color="primary" onClick={onClick}>
+                                Chi tiết <ErrorOutlineIcon sx={{ marginLeft: 1 }} />
+                            </Button>
+
+                        )
+                    }
+                },
                 {
                     field: 'action',
-                    headerName: '  ',
+                    headerName: '',
                     width: 220,
                     renderCell: (params) => {
                         const onClick = (e) => {
@@ -121,35 +149,10 @@ export default function TableHoKhau() {
                         }
                         return (< div style={{ display: 'flex', alignItems: 'stretch', flexDirection: 'row', padding: '2px 0', margin: '0px 2px' }}>
                             <Button variant="contained" color="primary" onClick={onClick}>
-                                Edit
+                                Sửa
                             </Button>
                             <Button variant="contained" color="error" onClick={onClickRemove}>
-                                Delete
-                            </Button>
-                        </ div >)
-                    }
-                },
-                {
-                    field: 'Detail',
-                    headerName: '  ',
-                    width: 220,
-                    renderCell: (params) => {
-                        const onClick = (e) => {
-                            e.stopPropagation();
-
-                            // const api = params.api;
-                            // const thisRow = {};
-
-                            // api.getAllColumns()
-                            //     .filter((c) => c.field !== '__check__' && !!c)
-                            //     .forEach(
-                            //         (c) => (thisRow[c.field] = params.getValue(params.id, c.field)),
-                            //     );
-                            setDialogInfo(true);
-                        };
-                        return (< div style={{ display: 'flex', alignItems: 'stretch', flexDirection: 'row', padding: '2px 0', margin: '0px 2px' }}>
-                            <Button variant="contained" color="primary" onClick={onClick}>
-                                Chi tiết
+                                Xóa
                             </Button>
                         </ div >)
                     }
@@ -168,7 +171,7 @@ export default function TableHoKhau() {
                     Xoá hộ khẩu thành công!
                 </Alert>
             </Snackbar>
-            <SimpleDialog
+            <FullScreenDialog
                 open={dialogInfo}
                 onClose={setDialogInfo}
             />
@@ -207,7 +210,6 @@ export default function TableHoKhau() {
                 disableSelectionOnClick
             />
             <Dialog
-
                 open={openAlert}
                 onClose={handleClose}
                 aria-labelledby="alert-dialog-title"
@@ -228,7 +230,6 @@ export default function TableHoKhau() {
                     </Button>
                 </DialogActions>
             </Dialog>
-
         </div>
     );
 }

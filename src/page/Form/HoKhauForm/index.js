@@ -52,9 +52,9 @@ export default function FormHKComponent() {
     };
 
     const [openImg, setOpenImg] = useState(false);
+    const [birthday, setBirthday] = useState(null);
     // const [name, setName] = useState('');
     // const [alias, setAlias] = useState('');
-    const [birthday, setBirthday] = useState(null);
     // const [birthPlace, setBirthPlace] = useState('');
     // const [domicile, setDomicile] = useState('');
     // const [dantoc, setDantoc] = useState('');
@@ -199,7 +199,7 @@ export default function FormHKComponent() {
                     {(arrImg.length > 0) && <div className={cx('img-render')}>{arrImg.map((item, index) => (
                         <div key={"image" + index} style={{ position: 'relative', display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center', width: 'auto' }}>
                             <img src={item.preview}
-                                style={{ width: 'auto', height: '150px', marginRight: 5, cursor: 'pointer' }}
+                                style={{ width: 'auto', height: '150px', marginRight: 5, marginBottom: 5, cursor: 'pointer' }}
                                 alt="evidence"
                                 onClick={handleRequestFullScreen} />
                             <Fab
@@ -218,7 +218,6 @@ export default function FormHKComponent() {
                     </div>}
                 </div>
                 <div className={cx('add-nk-area')}>
-
                     <Fab
                         color="primary"
                         size="small"

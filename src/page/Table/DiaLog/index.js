@@ -2,6 +2,8 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
 import Household from '../Paper/household';
 // import PropTypes from 'prop-types';
+import Population from '../TableTemplate/Population';
+
 export default function SimpleDialog({ open, onClose }) {
 
     const handleClose = () => {
@@ -9,9 +11,9 @@ export default function SimpleDialog({ open, onClose }) {
     };
 
     return (
-        <Dialog onClose={handleClose} open={open}>
-            <DialogTitle>Thông tin hộ khẩu</DialogTitle>
-            <Household />
+        <Dialog fullWidth={true} onClose={handleClose} open={open}>
+            <DialogTitle>Danh sách thành viên trong hộ khẩu</DialogTitle>
+            <Population />
         </Dialog>
     );
 }

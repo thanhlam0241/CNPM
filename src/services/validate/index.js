@@ -3,7 +3,7 @@ function checkUsernameValidation(value) {
     if (isWhitespace.test(value)) {
         return {
             isValid: false,
-            message: "Username must not contain any whitespace.",
+            message: "Tên đăng nhập không được chứa khoảng trắng.",
         };
     }
 
@@ -11,7 +11,7 @@ function checkUsernameValidation(value) {
     if (!isValidLength.test(value)) {
         return {
             isValid: false,
-            message: "Username must be between 6 to 16 characters.",
+            message: "Tên đăng nhập phải có ít nhất 6 ký tự và tối đa 16 ký tự.",
         };
     }
     return {
@@ -25,7 +25,7 @@ function checkPasswordValidation(value) {
     if (isWhitespace.test(value)) {
         return {
             isValid: false,
-            message: "Password must not contain any whitespace.",
+            message: "Mật khẩu không được chứa khoảng trắng.",
         };
     }
 
@@ -57,7 +57,7 @@ function checkPasswordValidation(value) {
     if (!isValidLength.test(value)) {
         return {
             isValid: false,
-            message: "Password must be between 8 to 16 characters.",
+            message: "Mật khẩu phải có ít nhất 8 ký tự và tối đa 16 ký tự.",
         };
     }
     return {

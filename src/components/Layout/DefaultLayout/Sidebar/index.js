@@ -1,39 +1,37 @@
 import styles from './Sidebar.module.scss';
 import { useState, useContext, useCallback } from 'react';
 //icon
-import MenuIcon from '@mui/icons-material/Menu';
+// import MenuIcon from '@mui/icons-material/Menu';
 import { PushPinOutlined } from '@mui/icons-material'
 import buttons from './ButtonNav';
 import classNames from 'classnames/bind';
 import { NavLink } from "react-router-dom";
 import CollapseButton from './Collapse';
 import { TitleContext } from '../';
-// import { AuthContext } from '~/components/AuthenProvider'
+import { AuthContext } from '~/components/AuthenProvider'
+import accountService from '~/services/account';
 const cx = classNames.bind(styles);
 
 function Sidebar() {
     //authenticate management
     const changer = useContext(TitleContext);
+    const { setAuth } = useContext(AuthContext);
     const handleAuth = () => {
+        accountService.logout(setAuth);
         localStorage.removeItem('myUserNameReactApp');
     }
-
+    //pin sidebar
     const [open, setOpen] = useState(true);
     const [pin, setPin] = useState(true);
-
     const toggle = () => {
         setTimeout(() => {
             setOpen(!open);
-            console.log('Toggle sidebar')
         }, 100)
     }
-
     const pinToggle = () => {
         setPin(!pin);
     }
-
-
-
+    //function do nothing
     const fixedFunc = useCallback(() => { }, []);
     return (
         <div className={cx('side-bar')} onMouseOver={(pin === true) ? fixedFunc : (open === false) ? toggle : fixedFunc} onMouseLeave={(pin === true) ? fixedFunc : (open === true) ? toggle : fixedFunc
