@@ -2,7 +2,7 @@
 import { useCallback, useState, useEffect, useRef, useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
 //material-ui
-import { Button, FormControl, CircularProgress, FormHelperText, InputLabel, InputAdornment, IconButton, Input } from '@mui/material'
+import { Button, CircularProgress, FormHelperText, InputLabel, InputAdornment, IconButton, Input, FormControl } from '@mui/material'
 //icons
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
@@ -81,9 +81,7 @@ export default function Login({ act }) {
                 }
                 else {
                     setAuth(user[0]);
-                    setTimeout(() => navigate('/profile'), 100)
-                    setUserName('');
-                    setPassword('');
+                    navigate('/profile');
                 }
             }
         }
@@ -134,12 +132,12 @@ export default function Login({ act }) {
             <div className={cx('login-form')}>
                 <div className={cx('login-form__input')} >
                     <FormControl sx={{ margin: '10px 0' }} className={cx('input-login')} variant="standard">
-                        <InputLabel sx={{ fontSize: 15 }} htmlFor="input_login_account">
-                            Account
+                        <InputLabel sx={{ fontSize: 20 }} htmlFor="input_login_account">
+                            Tên đăng nhập
                         </InputLabel>
                         <Input
                             inputRef={userRef}
-                            sx={{ fontSize: 15 }}
+                            sx={{ fontSize: 20 }}
                             id="input_login_account"
                             startAdornment={
                                 <InputAdornment position="start">
@@ -154,12 +152,12 @@ export default function Login({ act }) {
                         {start && <FormHelperText sx={{ fontSize: 10, color: 'red' }}>{usernameError}</FormHelperText>}
                     </FormControl>
                     <FormControl sx={{ margin: '10px 0' }} variant="standard">
-                        <InputLabel sx={{ fontSize: 15 }} htmlFor="input_login_password">
-                            Password
+                        <InputLabel sx={{ fontSize: 20 }} htmlFor="input_login_password">
+                            Mật khẩu
                         </InputLabel>
                         <Input
                             inputRef={passRef}
-                            sx={{ fontSize: 15 }}
+                            sx={{ fontSize: 20 }}
                             id="input_login_password"
                             type={showPassword ? 'text' : 'password'}
                             startAdornment={
@@ -186,13 +184,14 @@ export default function Login({ act }) {
                         />
                         {start && <FormHelperText sx={{ fontSize: 10, color: 'red' }}>{passwordError}</FormHelperText>}
                     </FormControl>
+                    <span className={cx('btn-text')}>Quên mật khẩu?</span>
                 </div>
                 <Button
                     variant="contained"
                     color="primary"
                     disabled={(usernameError.isValid && passwordError.isValid) ? true : false}
-                    onClick={handleSubmit} >
-                    Login
+                    onClick={handleSubmit} sx={{ fontSize: 20 }} >
+                    Đăng nhập
                 </Button>
                 {loading &&
                     <CircularProgress
@@ -204,8 +203,12 @@ export default function Login({ act }) {
                         thickness={4} />}
                 {start && <p ref={errRef} style={{ marginTop: 10, color: 'red' }}>{errMsg}</p>}
                 <hr className={cx('hr-login')} />
-                <p>Don't you have an account? <span onClick={() => act('2')} className={cx('signup-btn')}>Sign up</span></p>
+                <p style={{ fontSize: 18 }}>Chưa có tài khoản? <span onClick={() => act('2')} className={cx('signup-btn')}>Đăng ký</span></p>
+                <div>
+                    <span></span>
+                </div>
             </div>
+
         </div>
     )
 }

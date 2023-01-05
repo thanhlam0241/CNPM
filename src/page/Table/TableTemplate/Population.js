@@ -92,6 +92,27 @@ export default function Population({ editMode }) {
         setToPhuTrach(toPhuTrach);
     }, []);
 
+    const handleSave = () => {
+        setRows(
+            prev => prev.map(item => {
+                if (item.id === editRow.id) {
+                    return {
+                        id: item.id,
+                        identification,
+                        name,
+                        birthday,
+                        gender,
+                        relationship,
+                        soHoKhau,
+                        toPhuTrach
+                    }
+                }
+                return item;
+            })
+        );
+        setOpen(false);
+    }
+
     return (
         <div style={{ display: 'flex', alignItem: 'center', justifyContent: 'center', flexDirection: 'column' }}>
             <TableContainer component={Paper}>
@@ -233,6 +254,9 @@ export default function Population({ editMode }) {
                             onChange={(e) => setToPhuTrach(e.target.value)}
                             variant="standard"
                         />
+                    </div>
+                    <div>
+                        <Button sx={{ fontSize: 20, margin: '0 auto', display: 'block' }} color="primary" onClick={handleSave}>Lưu</Button>
                     </div>
                 </Box>
             </Dialog>

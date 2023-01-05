@@ -15,6 +15,7 @@ const genders = [
     { value: 'male', label: 'Nam' },
     { value: 'female', label: 'Nữ' }
 ]
+
 const columns = [
     // { field: 'id', headerName: 'ID' }, //1
     { field: 'name', headerName: 'Họ và tên', width: 150, editable: true },//2
@@ -29,7 +30,6 @@ const columns = [
     { field: 'identification', headerName: 'CCCD/CMND', width: 100, editable: true },//11
     { field: 'relationship', headerName: 'Quan hệ với chủ hộ', width: 140, editable: true },//12,
     { field: 'gender', headerName: 'Giới tính', editable: true }//13,
-
 ]
 //data in each row
 const rows = [
@@ -148,11 +148,11 @@ export default function FormHKComponent() {
 
     }, [arrImg]);
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <div className={cx('container')}>
             <Backdrop
                 sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
                 open={open}
-                onClick={handleClose}
+                onClick={() => { setOpen(false) }}
             >
                 <CircularProgress color="inherit" />
             </Backdrop>
@@ -161,17 +161,47 @@ export default function FormHKComponent() {
                 component="form"
                 sx={{
                     '& .MuiTextField-root': { m: 1, width: '25ch' },
+                    width: '100%',
                     display: 'flex',
-                    flexDirection: 'column'
+                    flexDirection: 'column',
+                    border: '1px solid #ccc',
+                    borderRadius: 5,
+                    padding: 2,
+                    marginBottom: 1
                 }}
                 noValidate
                 autoComplete="off"
             >
+                <h1>Đơn đăng ký hộ khẩu</h1>
                 <div className={cx('input-text-area')}>
-                    <TextField helperText='' required id="outlined-basic1" label="Số hộ khẩu" variant="outlined" />
-                    <TextField helperText='' required id="outlined-basic2" label="Nơi thường trú" variant="outlined" />
-                    <TextField helperText='' required id="outlined-basic3" label="Tổ phụ trách" variant="outlined" />
-                    <TextField helperText='' required id="outlined-basic4" label="Họ và tên chủ hộ" variant="outlined" />
+                    <TextField helperText='' required label="Số hộ khẩu" inputProps={{
+                        style: { fontSize: 20 }
+                    }}
+                        InputLabelProps={{
+                            style: { fontSize: 20 }
+                        }}
+                        variant="standard" />
+                    <TextField helperText='' required label="Nơi thường trú" inputProps={{
+                        style: { fontSize: 20 }
+                    }}
+                        InputLabelProps={{
+                            style: { fontSize: 20 }
+                        }}
+                        variant="standard" />
+                    <TextField helperText='' required label="Tổ phụ trách" inputProps={{
+                        style: { fontSize: 20 }
+                    }}
+                        InputLabelProps={{
+                            style: { fontSize: 20 }
+                        }}
+                        variant="standard" />
+                    <TextField helperText='' required label="Họ và tên chủ hộ" inputProps={{
+                        style: { fontSize: 20 }
+                    }}
+                        InputLabelProps={{
+                            style: { fontSize: 20 }
+                        }}
+                        variant="standard" />
                 </div>
                 <div className={cx('input-image-area')}>
                     <label htmlFor="upload-photo" style={{ marginLeft: 10 }}>
@@ -228,73 +258,139 @@ export default function FormHKComponent() {
                     >
                         <Add /> Thêm nhân khẩu
                     </Fab>
-                    <Collapse sx={{ margin: '5px 0' }} in={visible} timeout="auto" >
-                        <div style={{ display: 'flex', flexFlow: 'row wrap' }}>
-                            <TextField helperText='' required inputRef={nameRef} label="Họ và tên" variant="outlined" />
-                            <TextField helperText='' required inputRef={aliasRef} label="Bí danh" variant="outlined" />
-                            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                <DatePicker
-                                    required
-                                    sx={{ fontSize: 12 }}
-                                    label="Ngày sinh"
-                                    value={birthday}
-                                    inputRef={birthdayRef}
-                                    onChange={(newValue) => {
-                                        setBirthday(newValue);
+                    <Backdrop
+                        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                        open={visible}
+                    >
+                        <div className={cx('backdrop-add')}>
+                            <div style={{ display: 'flex', flexFlow: 'row wrap', justifyContent: 'center' }}>
+                                <TextField helperText='' required inputRef={nameRef} label="Họ và tên" inputProps={{
+                                    style: { fontSize: 20 }
+                                }}
+                                    InputLabelProps={{
+                                        style: { fontSize: 20 }
                                     }}
-                                    renderInput={(params) => <TextField {...params} />}
-                                />
-                            </LocalizationProvider>
-                            <TextField helperText='' required inputRef={birthPlaceRef} label="Nơi sinh" variant="outlined" />
-                            <TextField helperText='' required inputRef={domicileRef} label="Nguyên quán" variant="outlined" />
-                            <TextField helperText='' required inputRef={dantocRef} label="Dân tộc" variant="outlined" />
-                            <TextField helperText='' required inputRef={citizenshipRef} label="Quốc tịch" variant="outlined" />
-                            <TextField helperText='' required inputRef={careerRef} label="Nghề nghiệp" variant="outlined" />
-                            <TextField helperText='' required inputRef={workplaceRef} label="Nơi làm việc" variant="outlined" />
-                            <TextField helperText='' required inputRef={identificationRef} label="CMND/CCCD" variant="outlined" />
-                            <TextField helperText='' required inputRef={relationshipRef} label="Quan hệ với chủ hộ" variant="outlined" />
-                            <TextField helperText='' required
-                                id="standard-select-gender"
-                                select
-                                label="Giới tính"
-                                variant="standard"
-                                inputRef={genderRef}
-                                defaultValue=""
-                            >
-                                {genders.map((option) => (
-                                    <MenuItem key={option.value} value={option.label}>
-                                        {option.label}
-                                    </MenuItem>
-                                ))}
-                            </TextField>
+                                    variant="standard" />
+                                <TextField helperText='' required inputRef={aliasRef} label="Bí danh" inputProps={{
+                                    style: { fontSize: 20 }
+                                }}
+                                    InputLabelProps={{
+                                        style: { fontSize: 20 }
+                                    }}
+                                    variant="standard" />
+                                <LocalizationProvider sx={{ fontSize: 12 }} dateAdapter={AdapterDayjs}>
+                                    <DatePicker
+                                        required
+                                        sx={{ fontSize: 12 }}
+                                        label="Ngày sinh"
+                                        value={birthday}
+                                        inputRef={birthdayRef}
+                                        onChange={(newValue) => {
+                                            setBirthday(newValue);
+                                        }}
+                                        renderInput={(params) => <TextField {...params} />}
+                                    />
+                                </LocalizationProvider>
+                                <TextField helperText='' required inputRef={birthPlaceRef} label="Nơi sinh" inputProps={{
+                                    style: { fontSize: 20 }
+                                }}
+                                    InputLabelProps={{
+                                        style: { fontSize: 20 }
+                                    }}
+                                    variant="standard" />
+                                <TextField helperText='' required inputRef={domicileRef} label="Nguyên quán" inputProps={{
+                                    style: { fontSize: 20 }
+                                }}
+                                    InputLabelProps={{
+                                        style: { fontSize: 20 }
+                                    }}
+                                    variant="standard" />
+                                <TextField helperText='' required inputRef={dantocRef} label="Dân tộc" inputProps={{
+                                    style: { fontSize: 20 }
+                                }}
+                                    InputLabelProps={{
+                                        style: { fontSize: 20 }
+                                    }}
+                                    variant="standard" />
+                                <TextField helperText='' required inputRef={citizenshipRef} label="Quốc tịch" inputProps={{
+                                    style: { fontSize: 20 }
+                                }}
+                                    InputLabelProps={{
+                                        style: { fontSize: 20 }
+                                    }}
+                                    variant="standard" />
+                                <TextField helperText='' required inputRef={careerRef} label="Nghề nghiệp" inputProps={{
+                                    style: { fontSize: 20 }
+                                }}
+                                    InputLabelProps={{
+                                        style: { fontSize: 20 }
+                                    }}
+                                    variant="standard" />
+                                <TextField helperText='' required inputRef={workplaceRef} label="Nơi làm việc" inputProps={{
+                                    style: { fontSize: 20 }
+                                }}
+                                    InputLabelProps={{
+                                        style: { fontSize: 20 }
+                                    }}
+                                    variant="standard" />
+                                <TextField helperText='' required inputRef={identificationRef} label="CMND/CCCD" inputProps={{
+                                    style: { fontSize: 20 }
+                                }}
+                                    InputLabelProps={{
+                                        style: { fontSize: 20 }
+                                    }}
+                                    variant="standard" />
+                                <TextField helperText='' required inputRef={relationshipRef} label="Quan hệ với chủ hộ" inputProps={{
+                                    style: { fontSize: 20 }
+                                }}
+                                    InputLabelProps={{
+                                        style: { fontSize: 20 }
+                                    }}
+                                    variant="standard" />
+                                <TextField helperText='' required
+                                    id="standard-select-gender"
+                                    select
+                                    label="Giới tính"
+                                    variant="standard"
+                                    inputRef={genderRef}
+                                    defaultValue=""
+                                >
+                                    {genders.map((option) => (
+                                        <MenuItem key={option.value} value={option.label}>
+                                            {option.label}
+                                        </MenuItem>
+                                    ))}
+                                </TextField>
+                            </div>
+                            {visibleDes &&
+                                <div style={{ display: 'flex', flexFlow: 'row wrap', justifyContent: 'center' }}>
+                                    <Fab
+                                        sx={{ marginLeft: 1, width: 80 }}
+                                        color="success"
+                                        size="small"
+                                        component="span"
+                                        aria-label="add"
+                                        variant="extended"
+                                        onClick={handleAddNK}
+                                    >
+                                        <DoneSharp /> Đồng ý
+                                    </Fab>
+                                    <Fab
+                                        sx={{ marginLeft: 1, width: 50 }}
+                                        color="warning"
+                                        size="small"
+                                        component="span"
+                                        aria-label="add"
+                                        variant="extended"
+                                        onClick={handleBtnDes}
+                                    >
+                                        <CloseOutlined /> Hủy
+                                    </Fab>
+                                </div>
+                            }
                         </div>
-                    </Collapse>
-                    {visibleDes &&
-                        <span>
-                            <Fab
-                                sx={{ marginLeft: 1, width: 80 }}
-                                color="success"
-                                size="small"
-                                component="span"
-                                aria-label="add"
-                                variant="extended"
-                                onClick={handleAddNK}
-                            >
-                                <DoneSharp /> Đồng ý
-                            </Fab>
-                            <Fab
-                                sx={{ marginLeft: 1, width: 50 }}
-                                color="warning"
-                                size="small"
-                                component="span"
-                                aria-label="add"
-                                variant="extended"
-                                onClick={handleBtnDes}
-                            >
-                                <CloseOutlined /> Hủy
-                            </Fab>
-                        </span>
-                    }
+                    </Backdrop>
+
                     <div style={{ width: '100%' }}>
                         <h3>Danh sách nhân khẩu</h3>
                         <DataGrid

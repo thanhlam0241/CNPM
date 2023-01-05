@@ -30,7 +30,7 @@ export default function Profile() {
                     <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                         <TabList onChange={handleChange} aria-label="lab API tabs example" >
                             <Tab sx={{ fontSize: 15 }} label="Thông tin người dùng" value="1" />
-                            <Tab sx={{ fontSize: 15 }} label="Quản lý tài khoản" value="2" />
+                            <Tab sx={{ fontSize: 15 }} label="Đổi mật khẩu" value="2" />
                         </TabList>
                     </Box>
                     <TabPanel sx={{ width: '100%' }} value="1">

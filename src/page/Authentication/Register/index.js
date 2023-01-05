@@ -100,11 +100,11 @@ export default function Signup({ act }) {
             <div className={cx('login-form')}>
                 <div className={cx('login-form__input')}>
                     <FormControl sx={{ margin: '10px 0' }} className={cx('input-login')} variant="standard">
-                        <InputLabel sx={{ fontSize: 15 }} htmlFor="input_regis_account">
-                            Account
+                        <InputLabel sx={{ fontSize: 20 }} htmlFor="input_regis_account">
+                            Tên đăng nhập
                         </InputLabel>
                         <Input
-                            sx={{ fontSize: 15 }}
+                            sx={{ fontSize: 20 }}
                             id="input_regis_account"
                             startAdornment={
                                 <InputAdornment position="start">
@@ -118,11 +118,11 @@ export default function Signup({ act }) {
                         {status && <FormHelperText sx={{ fontSize: 10, color: 'red' }}>{userError}</FormHelperText>}
                     </FormControl>
                     <FormControl sx={{ margin: '10px 0' }} variant="standard">
-                        <InputLabel sx={{ fontSize: 15 }} htmlFor="input_regis_password">
-                            Password
+                        <InputLabel sx={{ fontSize: 20 }} htmlFor="input_regis_password">
+                            Mật khẩu
                         </InputLabel>
                         <Input
-                            sx={{ fontSize: 15 }}
+                            sx={{ fontSize: 20 }}
                             id="input_regis_password"
                             startAdornment={
                                 <InputAdornment position="start">
@@ -137,11 +137,11 @@ export default function Signup({ act }) {
                         {status && <FormHelperText sx={{ fontSize: 10, color: 'red' }}>{passError}</FormHelperText>}
                     </FormControl>
                     <FormControl sx={{ margin: '10px 0' }} variant="standard">
-                        <InputLabel sx={{ fontSize: 15 }} htmlFor="input_regis_conf_password">
-                            Confirm assword
+                        <InputLabel sx={{ fontSize: 20 }} htmlFor="input_regis_conf_password">
+                            Xác nhận mật khẩu
                         </InputLabel>
                         <Input
-                            sx={{ fontSize: 15 }}
+                            sx={{ fontSize: 20 }}
                             id="input_regis_conf_password"
                             startAdornment={
                                 <InputAdornment position="start">
@@ -157,8 +157,8 @@ export default function Signup({ act }) {
                     </FormControl>
                 </div>
 
-                <Button variant="contained" color="primary" onClick={handleRegister} >
-                    Register
+                <Button sx={{ fontSize: 20 }} variant="contained" color="primary" onClick={handleRegister} >
+                    Đăng ký
                 </Button>
                 {loading && <CircularProgress sx={{
                     marginTop: 1,
@@ -168,7 +168,7 @@ export default function Signup({ act }) {
                     thickness={4} />}
                 {status && <p style={{ marginTop: 10, color: 'red' }}>{msg}</p>}
                 <hr className={cx('hr-login')} />
-                <p>Do you have an account? <span onClick={() => act('1')} className={cx('signin-btn')}>Sign up</span></p>
+                <p style={{ fontSize: 18 }}>Đã có tài khoản? <span onClick={() => act('1')} className={cx('signin-btn')}>Đăng nhập</span></p>
             </div>
         </div>
     )

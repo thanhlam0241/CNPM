@@ -1,7 +1,6 @@
 //page
 import { NKTable, HKTable } from '~/page/Table';
-import { HKForm, NKForm } from '~/page/Form';
-import DashboardComponent from '~/page/Dashboard';
+import { HKForm, NKForm, RequireRemoving, DeathConfirm, SeparateHousehold, ChangePopulation } from '~/page/Form';
 import Authentication from '~/page/Authentication';
 import Profile from '~/page/Account';
 import Start from '~/page/StartPage';
@@ -18,6 +17,10 @@ const routes = [
         subRoutes: [
             { subpath: '/addnew/them_ho_khau', element: HKForm, id: 'ad1' },
             { subpath: '/addnew/them_nhan_khau', element: NKForm, id: 'ad2' },
+            { subpath: '/addnew/don_xin_chuyen_di', element: RequireRemoving, id: 'rm' },
+            { subpath: '/addnew/don_chung_tu', element: DeathConfirm, id: 'dc' },
+            { subpath: '/addnew/don_tach_ho_khau', element: SeparateHousehold, id: 'sh' },
+            { subpath: '/addnew/don_chuyen_doi_nhan_khau', element: ChangePopulation, id: 'cp' },
         ],
         id: 'tb',
         layout: DefaultLayout

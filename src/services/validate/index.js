@@ -29,6 +29,7 @@ function checkPasswordValidation(value) {
         };
     }
 
+
     // const isContainsUppercase = /^(?=.*[A-Z])/;
     // if (!isContainsUppercase.test(value)) {
     //     return {
@@ -66,9 +67,37 @@ function checkPasswordValidation(value) {
     };
 };
 
-class Validation {
+function checkIdentification(s) {
+    const isIdentification = /^[0-9]{12}$/;
+    if (!isIdentification.test(s)) {
+        return {
+            isValid: false,
+            message: "Số chứng minh nhân dân phải có 12 chữ số.",
+        };
+    }
+    return {
+        isValid: true,
+        message: "",
+    };
+}
+function checkEmail(s) {
+    const isEmail = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
+    if (!isEmail.test(s)) {
+        return {
+            isValid: false,
+            message: "Email không hợp lệ.",
+        };
+    }
+    return {
+        isValid: true,
+        message: "",
+    };
+}
+class Validator {
     checkPassword = (value) => checkPasswordValidation(value);
     checkUsername = (value) => checkUsernameValidation(value);
+    checkIdentifi = (value) => checkIdentification(value);
+    checkEmail = (value) => checkEmail(value);
 }
-const validation = new Validation();
+const validation = new Validator();
 export default validation;

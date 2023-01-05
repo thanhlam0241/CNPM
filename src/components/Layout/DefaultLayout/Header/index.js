@@ -68,7 +68,7 @@ function Header({ text }) {
                 </div>
             </div>
             <div className={cx('search')}>
-                <input placeholder='Search something' spellCheck={false} />
+                <input placeholder='Tìm kiếm' spellCheck={false} />
                 <button className={cx('search-btn')}>
                     <FontAwesomeIcon icon={faMagnifyingGlass} />
                 </button>

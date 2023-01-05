@@ -118,21 +118,21 @@ export default function TableHoKhau() {
                     headerName: '',
                     width: 220,
                     renderCell: (params) => {
-                        const onClick = (e) => {
-                            e.stopPropagation();
+                        // const onClick = (e) => {
+                        //     e.stopPropagation();
 
-                            const api = params.api;
-                            const thisRow = {};
+                        //     const api = params.api;
+                        //     const thisRow = {};
 
-                            api.getAllColumns()
-                                .filter((c) => c.field !== '__check__' && !!c)
-                                .forEach(
-                                    (c) => (thisRow[c.field] = params.getValue(params.id, c.field)),
-                                );
-                            setVisible(true);
-                            setIdField(thisRow.id);
-                            setDeskField(thisRow.desk);
-                        };
+                        //     api.getAllColumns()
+                        //         .filter((c) => c.field !== '__check__' && !!c)
+                        //         .forEach(
+                        //             (c) => (thisRow[c.field] = params.getValue(params.id, c.field)),
+                        //         );
+                        //     setVisible(true);
+                        //     setIdField(thisRow.id);
+                        //     setDeskField(thisRow.desk);
+                        // };
                         const onClickRemove = (e) => {
 
                             console.log('...')
@@ -148,9 +148,9 @@ export default function TableHoKhau() {
                             handleClickOpen();
                         }
                         return (< div style={{ display: 'flex', alignItems: 'stretch', flexDirection: 'row', padding: '2px 0', margin: '0px 2px' }}>
-                            <Button variant="contained" color="primary" onClick={onClick}>
+                            {/* <Button variant="contained" color="primary" onClick={onClick}>
                                 Sửa
-                            </Button>
+                            </Button> */}
                             <Button variant="contained" color="error" onClick={onClickRemove}>
                                 Xóa
                             </Button>
@@ -175,23 +175,23 @@ export default function TableHoKhau() {
                 open={dialogInfo}
                 onClose={setDialogInfo}
             />
-            <div>
+            {/* <div>
                 <Button sx={{ margin: '0 5px 1px 0' }} variant="contained" color="primary" onClick={() => setVisible(!visible)}>
                     Edit
                 </Button>
                 <Button sx={{ margin: '0 5px 1px 0' }} variant="contained" color="primary" onClick={() => setVisible(!visible)}>
                     Save
                 </Button>
-            </div>
+            </div> */}
 
-            <Collapse sx={{ margin: '5px 0' }} in={visible} timeout="auto" >
+            {/* <Collapse sx={{ margin: '5px 0' }} in={visible} timeout="auto" >
                 <div>
                     <TextField sx={{ margin: '0 5px 0 0' }} id="outlined-basic" label={columns[0].headerName}
                         variant='filled' value={idField} disabled />
                     <TextField sx={{ margin: '0 5px 0 0' }} id="outlined-basic" label={columns[1].headerName}
                         variant='filled' value={deskField} onChange={(e) => setDeskField(e.target.value)} />
                 </div>
-            </Collapse>
+            </Collapse> */}
 
             <DataGrid
                 sx={{ fontSize: 15 }}

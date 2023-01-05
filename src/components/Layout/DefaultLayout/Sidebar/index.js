@@ -38,7 +38,7 @@ function Sidebar() {
         } >
             <NavLink className={cx('btn-menu')} onClick={pinToggle} >
                 <span><PushPinOutlined /></span>
-                <span className={open ? cx('normal-btn') : cx('hide-btn')} >{open && 'Pin'}</span>
+                <span className={open ? cx('normal-btn') : cx('hide-btn')} >{open && 'Ghim'}</span>
             </NavLink>
             <hr />
             {buttons.map((button) => {

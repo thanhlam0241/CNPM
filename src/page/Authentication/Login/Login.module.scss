@@ -37,3 +37,10 @@
 .hr-login {
     margin: 20px 0 20px 0;
 }
+.btn-text {
+    color: blue;
+    &:hover {
+        color: #f50057;
+        cursor: pointer;
+    }
+}

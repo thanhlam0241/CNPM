@@ -11,7 +11,7 @@ import classNames from 'classnames/bind';
 
 const cx = classNames.bind(styles);
 
-export default function FormNKComponent() {
+export default function ChangePopulation() {
 
     const [open, setOpen] = useState(false);
     const handleClose = () => {
@@ -63,7 +63,7 @@ export default function FormNKComponent() {
                 >
                     <CircularProgress color="inherit" />
                 </Backdrop>
-                <h1 style={{ textAlign: 'center' }}>Đơn xin thêm nhân khẩu </h1>
+                <h1 style={{ textAlign: 'center' }}>Đơn xin thay đổi nhân khẩu </h1>
                 <div className={cx('line-form')}>
                     <TextField sx={{ m: 1, width: 270 }} label="Họ và tên" inputProps={{
                         style: { fontSize: 20 }
@@ -79,17 +79,8 @@ export default function FormNKComponent() {
                             style: { fontSize: 20 }
                         }}
                         variant="standard" />
-                    <TextField sx={{ m: 1, width: 270 }} label="Họ và tên chủ hộ"
-                        inputProps={{
-                            style: { fontSize: 20 }
-                        }}
-                        InputLabelProps={{
-                            style: { fontSize: 20 }
-                        }}
-                        variant="standard" />
 
-                </div>
-                <div className={cx('line-form')} >
+
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <DatePicker
                             value={value}
@@ -116,6 +107,8 @@ export default function FormNKComponent() {
                             }
                         />
                     </LocalizationProvider>
+                </div>
+                <div className={cx('line-form')} >
                     <TextField sx={{ m: 1, width: 270 }} label="Nơi sinh" inputProps={{
                         style: { fontSize: 20 }
                     }}
@@ -130,8 +123,6 @@ export default function FormNKComponent() {
                             style: { fontSize: 20 }
                         }}
                         variant="standard" />
-                </div>
-                <div className={cx('line-form')}>
                     <TextField sx={{ m: 1, width: 270 }} label="Dân tộc" inputProps={{
                         style: { fontSize: 20 }
                     }}
@@ -139,6 +130,8 @@ export default function FormNKComponent() {
                             style: { fontSize: 20 }
                         }}
                         variant="standard" />
+                </div>
+                <div className={cx('line-form')}>
                     <TextField sx={{ m: 1, width: 270 }} label="Quốc tịch" inputProps={{
                         style: { fontSize: 20 }
                     }}
@@ -153,8 +146,6 @@ export default function FormNKComponent() {
                             style: { fontSize: 20 }
                         }}
                         variant="standard" />
-                </div>
-                <div className={cx('line-form')}>
                     <TextField sx={{ m: 1, width: 270 }} label="Nơi làm việc" inputProps={{
                         style: { fontSize: 20 }
                     }}
@@ -162,6 +153,8 @@ export default function FormNKComponent() {
                             style: { fontSize: 20 }
                         }}
                         variant="standard" />
+                </div>
+                <div className={cx('line-form')}>
                     <TextField sx={{ m: 1, width: 270 }} label="CMND/CCCD" inputProps={{
                         style: { fontSize: 20 }
                     }}
@@ -169,23 +162,7 @@ export default function FormNKComponent() {
                             style: { fontSize: 20 }
                         }}
                         variant="standard" />
-                    <TextField sx={{ m: 1, width: 270 }} label="Quan hệ với chủ hộ" inputProps={{
-                        style: { fontSize: 20 }
-                    }}
-                        InputLabelProps={{
-                            style: { fontSize: 20 }
-                        }}
-                        variant="standard" />
-                </div>
-                <div className={cx('line-form')} >
-                    <TextField label="Sổ hộ khẩu"
-                        inputProps={{
-                            style: { fontSize: 20 }
-                        }}
-                        InputLabelProps={{
-                            style: { fontSize: 20 }
-                        }}
-                        variant="standard" />
+
                     <FormControl sx={{ m: 1, width: 270 }} variant="standard">
                         <InputLabel sx={{ fontSize: 22 }} htmlFor="input_login_account">
                             Giới tính
@@ -203,16 +180,6 @@ export default function FormNKComponent() {
                             </MenuItem>
                         </Select>
                     </FormControl>
-
-                    <TextField sx={{ m: 1, width: 270 }} label="Quan hệ với chủ hộ" inputProps={{
-                        style: { fontSize: 20 }
-                    }}
-                        InputLabelProps={{
-                            style: { fontSize: 20 }
-                        }}
-                        variant="standard" />
-                </div>
-                <div className={cx('line-form')}>
                     <TextField sx={{ m: 1, width: 270 }} label="Trình độ học vấn" inputProps={{
                         style: { fontSize: 20 }
                     }}
@@ -220,6 +187,8 @@ export default function FormNKComponent() {
                             style: { fontSize: 20 }
                         }}
                         variant="standard" />
+                </div>
+                <div className={cx('line-start')}>
                     <TextField sx={{ m: 1, width: 270 }} label="Tiền án" inputProps={{
                         style: { fontSize: 20 }
                     }}
@@ -227,7 +196,7 @@ export default function FormNKComponent() {
                             style: { fontSize: 20 }
                         }}
                         variant="standard" />
-                    <TextField sx={{ m: 1, width: 270 }} label="Lý do chuyển đến" inputProps={{
+                    <TextField sx={{ m: 1, width: 270 }} label="Lý do thay đổi" inputProps={{
                         style: { fontSize: 20 }
                     }}
                         InputLabelProps={{
@@ -235,40 +204,7 @@ export default function FormNKComponent() {
                         }}
                         variant="standard" />
                 </div>
-                <div className={cx('line-start')} >
-                    <label htmlFor="upload-photo" style={{ marginLeft: 10 }}>
-                        <input
-                            style={{ display: 'none' }}
-                            id="upload-photo"
-                            name="upload-photo"
-                            type="file"
-                            onChange={handleFileImage}
-                        />
-
-                        <Fab
-                            color="secondary"
-                            size="small"
-                            component="span"
-                            aria-label="add"
-                            variant="extended"
-                        >
-                            <Add /> Ảnh minh chứng
-                        </Fab>
-                    </label>
-                    {
-                        img && (
-                            <div>
-                                <img src={img.preview}
-                                    alt="avatar"
-                                    style={{ cursor: 'pointer', width: "300px", margin: 5 }}
-                                    onClick={handleRequestFullScreen} />
-                            </div>
-                        )
-                    }
-                </div>
             </Box>
-
-
             <Button onClick={handleToggle} style={{ width: 150 }} variant="contained">Gửi</Button>
         </div>
     );
