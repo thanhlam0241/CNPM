@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import { Collapse, Button, TextField } from '@mui/material';
+import TableSkeleton from '../../Skeleton/index'
 
 // import styles from './Table1.module.scss';
 // import classNames from 'classnames/bind';
@@ -26,12 +27,14 @@ const rows = [
 ]
 
 export default function TableNhanKhau() {
+    const [loadData, setLoadData] = useState(false);
     const [selectedRows, setSelectedRows] = useState(rows[0]);
     const [visible, setVisible] = useState(false);
     const [columnsTable, setColumsTable] = useState(columns);
     const [idField, setIdField] = useState(rows[0].id);
     const [deskField, setDeskField] = useState(rows[0].desk);
     useEffect(() => {
+        setLoadData(true);
         const actionFirst = setTimeout(() => {
             setColumsTable([
                 ...columns,
@@ -66,8 +69,9 @@ export default function TableNhanKhau() {
                         </ div >)
                     }
                 }
-            ])
-        }, 100)
+            ]);
+            setLoadData(false);
+        }, 1000)
 
         return () => {
             clearTimeout(actionFirst)
@@ -75,14 +79,14 @@ export default function TableNhanKhau() {
     }, [])
     return (
         <div style={{ height: '90%', width: '100%', margin: '10' }}>
-            <div>
+            {/* <div>
                 <Button sx={{ margin: '0 5px 1px 0' }} variant="contained" color="primary" onClick={() => setVisible(!visible)}>
                     Edit
                 </Button>
                 <Button sx={{ margin: '0 5px 1px 0' }} variant="contained" color="primary" onClick={() => setVisible(!visible)}>
                     Save
                 </Button>
-            </div>
+            </div> */}
 
             <Collapse sx={{ margin: '5px 0' }} in={visible} timeout="auto" >
                 <div>
@@ -93,7 +97,7 @@ export default function TableNhanKhau() {
                 </div>
             </Collapse>
 
-            <DataGrid
+            {loadData ? <TableSkeleton /> : <DataGrid
                 sx={{ fontSize: 15 }}
                 rows={rows}
                 columns={columnsTable}
@@ -107,7 +111,7 @@ export default function TableNhanKhau() {
                     },
                 }}
                 disableSelectionOnClick
-            />
+            />}
         </div>
     );
 }

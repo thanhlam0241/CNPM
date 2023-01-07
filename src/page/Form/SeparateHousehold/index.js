@@ -160,7 +160,7 @@ export default function SeparateHousehold() {
                 >
                     <CircularProgress color="inherit" />
                 </Backdrop>
-                <h1>Đơn xin chuyển đi</h1>
+                <h1>Đơn xin tách hộ khẩu</h1>
                 <div>
                     <TextField label="Nơi thường trú" variant="outlined" />
                     <TextField label="Tổ phụ trách" variant="outlined" />

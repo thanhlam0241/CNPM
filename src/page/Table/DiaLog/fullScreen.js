@@ -22,6 +22,7 @@ import styles from './FullScreenDialog.module.scss';
 //components
 import Population from '../TableTemplate/Population';
 import Household from '../Paper/household';
+import ConfirmBox from './ConfirmBox';
 
 const cx = classNames.bind(styles);
 const Transition = forwardRef(function Transition(props, ref) {
@@ -29,10 +30,6 @@ const Transition = forwardRef(function Transition(props, ref) {
 });
 
 export default function FullScreenDialog({ open, onClose }) {
-    //handle close this dialog
-    const handleClose = () => {
-        onClose(!open);
-    };
     //handle save button
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(false);
@@ -65,16 +62,38 @@ export default function FullScreenDialog({ open, onClose }) {
             }, 2000);
         }
     };
+    //handle when clode this dislog
+    const [isClose, setIsClose] = useState(false);
+    const handleCloseConfirmBox = useCallback(() => {
+        setIsClose(false);
+    }, []);
+
+
+
     // const [open, setOpen] = React.useState(false);
     const handleSuccess = () => {
         setSuccess(false);
     };
     //handle edit mode
-
     const handleEdit = useCallback(() => {
         setEditMode(true);
         setSuccess(false);
     }, [])
+    //handle close this dialog
+    const handleClose = () => {
+        setEditMode(false);
+        onClose(!open);
+        setIsClose(false);
+    };
+
+    const handlStartClose = () => {
+        if (editMode) {
+            setIsClose(true);
+        }
+        else {
+            onClose(!open);
+        }
+    };
     return (
         <div>
             <Snackbar open={success} autoHideDuration={6000} onClose={handleSuccess} >
@@ -90,7 +109,7 @@ export default function FullScreenDialog({ open, onClose }) {
             >
                 <div className={cx('header-paper-population')}>
                     <Button variant="contained" disabled={editMode} color="primary" sx={{ fontSize: '1.5rem', margin: '2 0', textAlign: 'right', width: 150 }} onClick={handleEdit}>Chỉnh sửa</Button>
-                    <Button variant="contained" color="error" sx={{ fontSize: '1.5rem', margin: '2 0', textAlign: 'right', width: 50 }} onClick={handleClose}>Đóng</Button>
+                    <Button variant="contained" color="error" sx={{ fontSize: '1.5rem', margin: '2 0', textAlign: 'right', width: 50 }} onClick={handlStartClose}>Đóng</Button>
                 </div>
                 <Household editMode={editMode} />
                 <Population editMode={editMode} />
@@ -120,8 +139,8 @@ export default function FullScreenDialog({ open, onClose }) {
                     </Box>
 
                 </div>
-
             </Dialog>
+            <ConfirmBox open={isClose} onClose={handleCloseConfirmBox} onAgree={handleClose} />
         </div >
     );
 }

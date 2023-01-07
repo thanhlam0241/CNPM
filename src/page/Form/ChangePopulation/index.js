@@ -1,11 +1,11 @@
 import { useState, useEffect, useCallback } from 'react';
-import { Fab, MenuItem, Box, TextField, Button, Backdrop, CircularProgress, InputLabel, InputAdornment, IconButton, Input, FormControl, Select } from '@mui/material';
+import { MenuItem, Box, TextField, Button, Backdrop, CircularProgress, InputLabel, InputAdornment, Input, FormControl, Select } from '@mui/material';
 
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers';
 
-import { Add } from '@mui/icons-material';
+
 import styles from './NhanKhau.module.scss'
 import classNames from 'classnames/bind';
 
@@ -45,12 +45,14 @@ export default function ChangePopulation() {
                 component="form"
                 sx={{
                     '& .MuiTextField-root': { m: 1, width: '25ch' },
+                    width: '100%',
                     display: 'flex',
                     flexDirection: 'column',
-                    alignItems: 'stretch',
                     border: '1px solid #ccc',
-                    borderRadius: '5px',
-                    padding: 5
+                    alignItems: 'stretch',
+                    borderRadius: 5,
+                    padding: 2,
+                    marginBottom: 1
                 }}
                 noValidate
                 autoComplete="off"
@@ -88,7 +90,7 @@ export default function ChangePopulation() {
                                 setValue(newValue);
                             }}
                             renderInput={({ inputRef, inputProps, InputProps }) =>
-                                <FormControl sx={{ m: 1, width: 270 }} variant="standard">
+                                <FormControl sx={{ m: 1, width: 264 }} variant="standard">
                                     <InputLabel sx={{ fontSize: 22 }} htmlFor="input_login_account">
                                         Ngày sinh
                                     </InputLabel>
@@ -205,7 +207,12 @@ export default function ChangePopulation() {
                         variant="standard" />
                 </div>
             </Box>
-            <Button onClick={handleToggle} style={{ width: 150 }} variant="contained">Gửi</Button>
+            <div>
+                <Button color="primary" onClick={handleToggle} variant="contained">
+                    Gửi
+                </Button>
+            </div>
+
         </div>
     );
 }

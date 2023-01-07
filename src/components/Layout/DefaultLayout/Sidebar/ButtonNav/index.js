@@ -22,7 +22,8 @@ const buttons = [
             { title: 'Xin chuyển đi', id: 'addnew3', linkCol: '/addnew/don_xin_chuyen_di' },
             { title: 'Chứng tử', id: 'addnew4', linkCol: '/addnew/don_chung_tu' },
             { title: 'Tách hộ khẩu', id: 'addnew5', linkCol: '/addnew/don_tach_ho_khau' },
-            { title: 'Thay đổi nhân khẩu', id: 'addnew6', linkCol: '/addnew/don_chuyen_doi_nhan_khau' }
+            { title: 'Thay đổi nhân khẩu', id: 'addnew6', linkCol: '/addnew/don_chuyen_doi_nhan_khau' },
+            { title: 'Thay đổi hộ khẩu', id: 'addnew7', linkCol: '/addnew/don_thay_doi_ho_khau' },
         ],
         id: 'addnew'
     },

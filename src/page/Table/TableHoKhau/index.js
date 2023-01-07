@@ -3,6 +3,8 @@ import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import { Collapse, Button, TextField, Alert, Snackbar, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import FullScreenDialog from '../DiaLog/fullScreen';
+
+import TableSkeleton from '../../Skeleton/index'
 // import styles from './Table1.module.scss';
 // import classNames from 'classnames/bind';
 
@@ -32,7 +34,8 @@ const rowInit = [
 export default function TableHoKhau() {
     //các dữ liệu từng dòng được khởi tạo trong bảng, sẽ gọi bằng api
     const [rows, setRows] = useState(rowInit);
-
+    //
+    const [loadData, setLoadData] = useState(false);
     //trạng thái thanh chỉnh sửa thông tin từng hộ khẩu
     const [visible, setVisible] = useState(false);
 
@@ -82,7 +85,8 @@ export default function TableHoKhau() {
     };
     //thêm trạng thái các nút cho từng dòng: sưa, xóa, chi tiết
     useEffect(() => {
-        const actionFirst = setTimeout(() => {
+        setLoadData(true);
+        const a = setTimeout(() => {
             setColumsTable([
                 ...columns.filter((c) => c.field !== 'thanhVien'),
                 {
@@ -157,12 +161,10 @@ export default function TableHoKhau() {
                         </ div >)
                     }
                 }
-            ])
-        }, 100)
-
-        return () => {
-            clearTimeout(actionFirst)
-        }
+            ]);
+            setLoadData(false);
+        }, 3000);
+        return () => clearTimeout(a);
     }, [])
     return (
         <div style={{ height: '90%', width: '100%', margin: '10' }}>
@@ -193,7 +195,7 @@ export default function TableHoKhau() {
                 </div>
             </Collapse> */}
 
-            <DataGrid
+            {loadData ? <TableSkeleton /> : <DataGrid
                 sx={{ fontSize: 15 }}
                 editMode="row"
                 rows={rows}
@@ -208,7 +210,7 @@ export default function TableHoKhau() {
                     },
                 }}
                 disableSelectionOnClick
-            />
+            />}
             <Dialog
                 open={openAlert}
                 onClose={handleClose}
